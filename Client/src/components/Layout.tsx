@@ -5,6 +5,7 @@ import Admin from "./admin/Admin";
 import Footer from "./footer/Footer";
 import Header from "./header/header";
 import Hero from "./hero/Hero";
+import LandingPage from "./LandingPage/LandingPage";
 
 function Layout() {
   return (
@@ -14,6 +15,7 @@ function Layout() {
         <Route path="/admin/" component={Admin} />
         <Route path="/" component={Hero} />
       </Switch>
+      <LandingPage />
       <Footer />
       {/* // här har vi vår router */}
     </BrowserRouter>

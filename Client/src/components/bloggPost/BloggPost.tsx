@@ -9,6 +9,10 @@ import {
   Typography,
 } from "@material-ui/core";
 import ThreeDRotationIcon from "@material-ui/icons/ThreeDRotation";
+import ThumbDownIcon from '@material-ui/icons/ThumbDown';
+import ThumbUpIcon from '@material-ui/icons/ThumbUp';
+import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
+
 function BloggPostComponent() {
   return (
     <Card style={{ width: "40rem" }}>
@@ -29,6 +33,21 @@ function BloggPostComponent() {
         </Typography>
       </CardContent>
       <CardActions>
+      <div className="actions">
+                            <div className="action">
+                                <p>LIKE</p>
+                                <ThumbUpIcon className="icons" />
+                            </div>
+                            <div className="action">
+                                <p>DISLIKE</p>
+                                <ThumbDownIcon className="icons" />
+                            </div>
+                            <div className="action">
+                                COMMENT
+                                <ChatBubbleIcon className="icons" />
+                            </div>
+
+      </div>
         <IconButton>
           <ThreeDRotationIcon />
         </IconButton>

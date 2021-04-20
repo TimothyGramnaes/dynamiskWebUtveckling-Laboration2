@@ -1,0 +1,17 @@
+.actions {
+  display: flex;
+  flex-direction: row;
+}
+
+.action {
+  display: flex;
+  flex-direction: row;
+  justify-content: baseline;
+  align-items: center;
+  padding: 0.4rem;
+}
+
+.icons {
+  padding: 0.2rem;
+  font-size: medium;
+}
