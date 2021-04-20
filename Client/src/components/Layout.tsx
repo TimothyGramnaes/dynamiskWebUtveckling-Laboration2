@@ -1,9 +1,13 @@
+import React from "react"
+import '../main.css'
+import Header from "./header/header"
 
 function Layout() {
 
     return (
-        <div><p>Hej</p>
-        {/* // här har vi vår router */}
+        <div>
+            <Header />
+            {/* // här har vi vår router */}
         </div>
     )
 }
