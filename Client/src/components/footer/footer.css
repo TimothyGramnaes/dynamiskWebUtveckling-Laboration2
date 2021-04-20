@@ -1,0 +1,69 @@
+footer {
+  background: #575757;
+  /* margin-bottom: -1rem; */
+  padding: 2.5rem 2rem .5rem 2rem;
+  /* padding: 2rem 0; */
+  font-weight: 600;
+}
+
+footer .logo {
+  margin: 0;
+  color: white;
+}
+
+footer .container {
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+footer .top-links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+footer .top-links a {
+  display: flex;
+  align-items: center;
+}
+
+footer a {
+  color: white;
+  text-decoration: none;
+}
+
+footer a img,footer p img {
+  margin-left: 1rem;
+}
+
+footer .divider {
+  color: rgb(163, 163, 163);
+  font-size: 2rem;
+  font-weight: 400;
+}
+
+footer .contact-section a {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+footer .contact-section p {
+  color: white;
+  margin: .25rem 0;
+}
+
+footer .contact-section {
+  margin-bottom: 3rem;
+}
+
+.copyright {
+  text-align: center;
+}
+
+.copyright p {
+  color: rgb(150, 150, 150);
+  font-weight: 400;
+}
