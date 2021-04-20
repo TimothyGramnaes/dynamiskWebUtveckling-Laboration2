@@ -1,0 +1,41 @@
+.hero {
+  display: flex;
+  padding: 1rem 6rem 6rem 6rem;
+  align-items: center;
+}
+
+.hero-img {
+  width: 30rem;
+}
+
+.text {
+  padding: 0 3rem 0 0;
+}
+
+h1 {
+  font-size: 3rem;
+  font-weight: 800;
+}
+
+.hero-buttons button {
+  padding: .8rem 2.5rem;
+  margin-right: 1.5rem;
+  text-transform: uppercase;
+  border-radius: 100rem;
+  font-family: 'Montserrat';
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.primary-hero-btn {
+  color: white;
+  border: none;
+  background: linear-gradient(0deg, rgba(255,176,103,1) 0%, rgba(255,122,0,1) 100%);
+  padding: 6rem;
+}
+
+.secondary-hero-btn {
+  color: black;
+  border: black 2px solid;
+  background: transparent;
+}
