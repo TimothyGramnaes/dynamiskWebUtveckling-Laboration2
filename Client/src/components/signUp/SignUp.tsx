@@ -2,45 +2,59 @@ import React from "react";
 import TextField from "@material-ui/core/TextField";
 import { Button } from "@material-ui/core";
 
-function LoginComponent() {
+function SignUpComponent() {
   return (
-    <form style={{ border: "1px solid black", width: "30rem" }} action="">
-      <h3 style={{ padding: "1rem" }}>LOGIN</h3>
+    <form
+      style={{
+        border: "1px solid black",
+        width: "30rem",
+      }}
+      action=""
+    >
+      <h3 style={{ padding: "1rem" }}>CREATE ACCOUNT</h3>
       <div style={{ width: "100%", display: "flex", flexDirection: "column" }}>
         <TextField
           style={{ margin: "1rem" }}
           required
-          id="username"
+          id="create-username"
           label="Username"
           defaultValue="username"
-          // variant="outlined"
+          //variant="outlined"
         />
         <TextField
           style={{ margin: "1rem" }}
           required
-          id="password"
+          id="create-e-mail"
+          label="e-mail"
+          defaultValue="e-mail"
+          //variant="outlined"
+        />
+        <TextField
+          style={{ margin: "1rem" }}
+          required
+          id="create-password"
           label="Password"
           defaultValue="password"
-          // variant="outlined"
+          //variant="outlined"
         />
       </div>
       <Button style={{ margin: "1rem" }} variant="outlined" color="primary">
-        Log in
+        SIGN UP
       </Button>
       <Button style={{ margin: "1rem" }} variant="outlined" color="secondary">
-        Cancel
+        CANCEL
       </Button>
-      <p style={{ padding: "1rem" }}>Dont't have an account yet?</p>
+      <p style={{ padding: "1rem" }}>Already have an account?</p>
       <Button
         style={{ margin: "1rem" }}
         variant="outlined"
         color="primary"
         href=""
       >
-        Sign up
+        LOG IN
       </Button>
     </form>
   );
 }
 
-export default LoginComponent;
+export default SignUpComponent;
