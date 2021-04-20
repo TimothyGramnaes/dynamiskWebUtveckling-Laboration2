@@ -1,7 +1,7 @@
 header {
   background: transparent;
   margin-top: 0;
-  padding: 0 3rem;
+  padding: 0 6rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -15,4 +15,25 @@ header {
 
 .logo b {
   color: #FF7A00;
+}
+
+.log-in, .sign-up {
+  border-radius: 100rem;
+  padding: .5rem 1.5rem;
+  font-family: 'Montserrat';
+  text-transform: uppercase;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.log-in {
+  margin-right: 1rem;
+  background: black;
+  border-color: black;
+  color: white;
+}
+
+.sign-up {
+  background: transparent;
+  border: 2px black solid;
 }
