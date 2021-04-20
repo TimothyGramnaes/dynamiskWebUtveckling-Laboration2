@@ -21,17 +21,25 @@ function ViewPost() {
         }
     ]
 
+    const test = [1,2,3,4,5]
+
     const [posts, setPosts] = useState<Posts[]>(data)
 
-
-    const list = posts.map((p) => {
-        <p>{p.title}</p>
-    })
+    const postsList = posts.map((p) => (
+        <div key="p.id">
+            <h4>{p.title}</h4>
+            <p>{p.content}</p>
+            <div className="btn-container">
+                <button>Edit</button>
+                <button>Delete</button>
+            </div>
+        </div>
+    ))
 
     return(
         <div className="viewlist" style={{height:"10rem"}}>
             <h3>Your Posts</h3>
-            {list}
+            {postsList}
         </div>
     )
 }
