@@ -21,8 +21,6 @@ function ViewPost() {
         }
     ]
 
-    const test = [1,2,3,4,5]
-
     const [posts, setPosts] = useState<Posts[]>(data)
 
     const postsList = posts.map((p) => (
@@ -37,7 +35,7 @@ function ViewPost() {
     ))
 
     return(
-        <div className="viewlist" style={{height:"10rem"}}>
+        <div className="viewlist">
             <h3>Your Posts</h3>
             {postsList}
         </div>
