@@ -1,10 +1,11 @@
-import LoginComponent from "./login/Login";
+import React from "react";
+import "../main.css";
+import Header from "./header/header";
 
 function Layout() {
   return (
     <div>
-      <p>Hej</p>
-      <LoginComponent />
+      <Header />
       {/* // här har vi vår router */}
     </div>
   );

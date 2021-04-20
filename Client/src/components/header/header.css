@@ -1,0 +1,18 @@
+header {
+  background: transparent;
+  margin-top: 0;
+  padding: 0 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo, .logo b {
+  font-weight: 800;
+  font-style: italic;
+  font-family: 'Merriweather Sans', sans-serif;
+}
+
+.logo b {
+  color: #FF7A00;
+}
