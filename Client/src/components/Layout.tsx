@@ -8,7 +8,6 @@ function Layout() {
   return (
     <div>
       <Header />
-
       <Hero />
       <Footer />
       {/* // här har vi vår router */}
