@@ -1,6 +1,6 @@
 .hero {
   display: flex;
-  padding: 1rem 6rem;
+  padding: 1rem 6rem 6rem 6rem;
   align-items: center;
 }
 
