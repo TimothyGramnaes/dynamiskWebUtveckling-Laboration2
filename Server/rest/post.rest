@@ -1,0 +1,33 @@
+GET http://localhost:3001/api/post
+
+###
+
+GET http://localhost:3001/api/post/608163124e6aad6244ba7508
+
+###
+
+POST http://localhost:3001/api/post
+Content-Type: application/json
+
+{
+    "authorKey": "1",
+    "author": "Tim",
+    "title": "Rubrik",
+    "salt": "Massa Häxor"
+}
+
+###
+
+PUT http://localhost:3001/api/post/608163124e6aad6244ba7508
+Content-Type: application/json
+
+{
+    "authorKey": "1",
+    "author": "CiiD",
+    "title": "Rubrik",
+    "salt": "Massa Lorem"
+}
+
+###
+
+DELETE http://localhost:3001/api/post/608163ff5cb761246c6bc54d

@@ -2,10 +2,10 @@ const mongoose = require("mongoose");
 
 const postSchema = new mongoose.Schema(
   {
-    authorKey: "string",
-    author: "string",
-    title: "string",
-    salt: "string",
+    authorKey: "String",
+    // userId: { type: Types.ObjectId, ref: 'user', required: true },
+    title: "String",
+    salt: "String",
   },
   {
     timestamps: true,
