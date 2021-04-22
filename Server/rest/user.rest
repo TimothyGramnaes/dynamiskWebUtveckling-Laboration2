@@ -1,0 +1,32 @@
+GET http://localhost:3001/api/user
+
+###
+
+GET http://localhost:3001/api/user/60816d3718d9ca0818fa418e
+
+###
+
+POST http://localhost:3001/api/user
+Content-Type: application/json
+
+{
+    "userName": "Oliver",
+    "email": "Oliver@hej.se",
+    "password": "köttorumpa"
+}
+
+###
+
+PUT http://localhost:3001/api/user/608163124e6aad6244ba7508
+Content-Type: application/json
+
+{
+    "authorKey": "1",
+    "author": "CiiD",
+    "title": "Rubrik",
+    "salt": "Massa Lorem"
+}
+
+###
+
+DELETE http://localhost:3001/api/user/60816d3718d9ca0818fa418e

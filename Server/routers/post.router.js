@@ -6,6 +6,13 @@ const router = express.Router();
 
 router.get("/api/post", async (req, res) => {
   const docs = await PostModel.find({});
+
+  res.status(200).json(docs);
+});
+
+// Get user specific posts
+router.get("/api/post", async (req, res) => {
+  const docs = await PostModel.find().populate("userId");
   res.status(200).json(docs);
 });
 

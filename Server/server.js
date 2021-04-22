@@ -1,12 +1,14 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const postRouter = require("./routers/post.router");
+const userRouter = require("./routers/user.router");
 
 const app = express();
 
 app.use(express.json());
 app.get("/", (req, res) => res.json("HÄÄÄÄÄÄÄÄÄÄJ!!!!"));
 app.use(postRouter);
+app.use(userRouter);
 //server.use('/posts', postsRoutes)
 
 app.use((err, req, res, next) => {
