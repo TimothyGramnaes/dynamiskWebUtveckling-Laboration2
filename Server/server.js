@@ -6,7 +6,7 @@ const app = express();
 
 app.use(express.json());
 app.get("/", (req, res) => res.json("HÄÄÄÄÄÄÄÄÄÄJ!!!!"));
-app.use("/posts", postRouter);
+app.use(postRouter);
 //server.use('/posts', postsRoutes)
 
 app.use((err, req, res, next) => {
@@ -25,8 +25,9 @@ async function run() {
     console.error(error);
   }
 }
-run();
 
 app.listen(3001, () => {
   console.log("Server is running");
 });
+
+run();
