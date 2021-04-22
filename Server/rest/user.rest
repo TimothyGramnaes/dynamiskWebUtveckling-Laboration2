@@ -29,4 +29,14 @@ Content-Type: application/json
 
 ###
 
+POST http://localhost:3001/api/user/register
+Content-Type: application/json
+
+{
+    "userName": "Oliver",   
+    "password": "dansa"
+}
+
+###
+
 DELETE http://localhost:3001/api/user/60816d3718d9ca0818fa418e
