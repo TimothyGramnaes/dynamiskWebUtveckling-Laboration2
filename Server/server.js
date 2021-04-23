@@ -30,7 +30,7 @@ app.use((err, req, res, next) => {
 
 async function run() {
   try {
-    await mongoose.connect("mongodb://localhost:27017/post", {
+    await mongoose.connect("", {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
