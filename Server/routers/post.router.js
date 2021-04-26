@@ -34,11 +34,11 @@ router.delete('/api/post/:id', async (req, res) => {
 
   const doc = await PostModel.findById(req.params.id);
   PostModel.deleteOne(doc, (error) => {
-      if(error) {
-          console.error(error) 
-      } else return
-  }) 
-  console.log(doc)    
+    if (error) {
+      console.error(error)
+    } else return
+  })
+  console.log(doc)
 })
 
 module.exports = router;

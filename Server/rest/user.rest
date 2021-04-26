@@ -43,5 +43,16 @@ Content-Type: application/json
 
 ###
 
+
+
 // VG
 DELETE http://localhost:3001/api/user/60816d3718d9ca0818fa418e
+###
+
+POST http://localhost:3001/api/user/login
+Content-Type: application/json
+
+{
+    "userName": "Nicklas",   
+    "password": "dansamedvargar"
+}
