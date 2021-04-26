@@ -1,12 +1,20 @@
+
+// Hämtar alla poster på hemsidan så de visas på STARTSIDAN
 GET http://localhost:3001/api/post
 
 ###
 
-GET http://localhost:3001/api/post/608163124e6aad6244ba7508
+// Hämtar alla inloggad användares inlägg
+// Steg kvar:
+// Token ska läggas till i cookie. 
+// I denna enpoint ska cookies jämföra mot användare och filtrera lista
+// OM admin - visa alla inlägg
+GET http://localhost:3001/api/admin/post
 
 ###
 
-POST http://localhost:3001/api/post
+// Skapa inlägg - FIXAD
+POST http://localhost:3001/api/admin/post
 Content-Type: application/json
 
 {
@@ -18,7 +26,8 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:3001/api/post/608163124e6aad6244ba7508
+// Ändra inlägg - SKA GÖRAS
+PUT http://localhost:3001/api/admin/post/608163124e6aad6244ba7508
 Content-Type: application/json
 
 {
@@ -30,4 +39,5 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:3001/api/post/608163ff5cb761246c6bc54d
+// Fixa frontend o id hämtas
+DELETE http://localhost:3001/api/admin/post/id

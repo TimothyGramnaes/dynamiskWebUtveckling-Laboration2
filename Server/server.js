@@ -18,7 +18,7 @@ app.use((err, req, res, next) => {
 
 async function run() {
   try {
-    await mongoose.connect("mongodb://localhost:27017/post", {
+    await mongoose.connect("mongodb+srv://dbAdmin:dbAdmin@clusterdev.9j1cn.mongodb.net/salt", {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
@@ -27,6 +27,21 @@ async function run() {
     console.error(error);
   }
 }
+
+
+const auth = (req, res, next) => {
+  const ok = false
+
+  if (ok === false) {
+    res.send('Funkar inte')
+  } else {
+    next()
+  }
+}
+
+app.get('/admin', auth, (req, res) => {
+  res.send('Funkar')
+})
 
 app.listen(3001, () => {
   console.log("Server is running");
