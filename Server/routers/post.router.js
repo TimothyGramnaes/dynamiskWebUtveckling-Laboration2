@@ -14,9 +14,9 @@ router.get("/api/post", async (req, res) => {
 
 // Get user specific posts
 router.get("/api/admin/post", async (req, res) => {
-  // const docs = await PostModel.find().populate("userId");
-  const user = 2
-  const admin = false
+ 
+  const user = 2 // Token id from cookie
+  const admin = true // ModelPost.user.Id == ture || false
 
   if(!admin) {
      const docs = await PostModel.find({ authorKey: user});
@@ -27,22 +27,19 @@ router.get("/api/admin/post", async (req, res) => {
   } else {
     res.status(400).json('No Post')
   }
-  
-  // console.log(userPost[0])
-  // res.status(200).json(userPost)
-  // res.status(200).json(docs)
 
-
-  // res.status(200).json(docs);
 });
 
 // Get one item
 router.get('/api/post/:id', async (req, res) => {
+  
   const docs = await PostModel.findById(req.params.id);
   res.status(200).json(docs);
 })
 
 router.post("/api/admin/post", async (req, res) => {
+   // const docs = await PostModel.find().populate("userId");
+   // populate with token from cookie == userModel.id - DENNA
   const doc = await PostModel.create(req.body);
   res.status(201).json(doc);
 });
