@@ -40,6 +40,21 @@ async function run() {
   }
 }
 
+
+const auth = (req, res, next) => {
+  const ok = false
+
+  if (ok === false) {
+    res.send('Funkar inte')
+  } else {
+    next()
+  }
+}
+
+app.get('/admin', auth, (req, res) => {
+  res.send('Funkar')
+})
+
 app.listen(3001, () => {
   console.log("Server is running");
 });

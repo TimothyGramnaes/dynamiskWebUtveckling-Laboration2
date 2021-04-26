@@ -2,21 +2,35 @@ GET http://localhost:3001/api/user
 
 ###
 
+// om man ska ta bort en användare VG
 GET http://localhost:3001/api/user/60816d3718d9ca0818fa418e
 
 ###
 
-POST http://localhost:3001/api/user
+// Skapa användare
+// I denna ska en hasning av lösenord göras - FIXAD
+// 
+POST http://localhost:3001/api/user/register
 Content-Type: application/json
 
 {
-    "userName": "Oliver",
     "email": "Oliver@hej.se",
-    "password": "köttorumpa"
+    "password": "mupparsle",
+    "admin": "false"
 }
 
 ###
 
+// Login
+// Olof skapat en token - FIXAD
+// skapa - lägga till cookie - SKA GÖRAS
+// Hur fungera - Jämför hashed lösenord för att gå vidare och sätta cookie - SKA GÖRAS
+POST http://localhost:3001/api/user/login
+
+###
+
+
+// För VG
 PUT http://localhost:3001/api/user/608163124e6aad6244ba7508
 Content-Type: application/json
 
@@ -29,16 +43,9 @@ Content-Type: application/json
 
 ###
 
-POST http://localhost:3001/api/user/register
-Content-Type: application/json
 
-{
-    "userName": "Nicklas",   
-    "password": "dansamedvargar"
-}
 
-###
-
+// VG
 DELETE http://localhost:3001/api/user/60816d3718d9ca0818fa418e
 ###
 

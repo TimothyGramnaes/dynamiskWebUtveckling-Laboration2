@@ -4,6 +4,7 @@ const PostModel = require("../models/post.model");
 
 const router = express.Router();
 
+
 router.get("/api/post", async (req, res) => {
   const docs = await PostModel.find({});
 
