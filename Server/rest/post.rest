@@ -18,7 +18,7 @@ POST http://localhost:3001/api/admin/post
 Content-Type: application/json
 
 {
-    "authorKey": "1",
+    "authorKey": "2",
     "author": "Tim",
     "title": "Rubrik",
     "salt": "Massa Häxor"
