@@ -6,6 +6,8 @@ import Footer from "./footer/Footer";
 import Header from "./header/header";
 import Hero from "./hero/Hero";
 import LandingPage from "./LandingPage/LandingPage";
+import Login from './login/Login'
+import SignUp from './signUp/SignUp'
 
 function Layout() {
   return (
@@ -13,9 +15,12 @@ function Layout() {
       <Header />
       <Switch>
         <Route path="/admin/" component={Admin} />
+        <Route path="/signup" component={SignUp} />
+        <Route path="/login" component={Login} />
         <Route path="/" component={Hero} />
+        <LandingPage />
       </Switch>
-      <LandingPage />
+      
       <Footer />
       {/* // här har vi vår router */}
     </BrowserRouter>

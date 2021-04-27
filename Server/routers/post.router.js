@@ -24,7 +24,12 @@ router.get('/api/post/:id', async (req, res) => {
 })
 
 router.post("/api/post", async (req, res) => {
-  const doc = await PostModel.create(req.body);
+  const post = {
+    "authorKey": 1,
+    "title": req.body.formTitle,
+    "salt": req.body.formContent
+  }
+  const doc = await PostModel.create(post);
   res.status(201).json(doc);
 });
 
