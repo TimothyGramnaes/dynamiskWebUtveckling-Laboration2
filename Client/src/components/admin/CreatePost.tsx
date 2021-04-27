@@ -29,7 +29,7 @@ function CreatePost() {
             body: JSON.stringify(formData)
         }
         
-        fetch('/api/post', options
+        fetch('/api/admin/post', options
         ).then((response)=>{
             return response.text();
         }).then((text) => {
