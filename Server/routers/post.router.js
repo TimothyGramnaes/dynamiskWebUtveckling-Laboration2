@@ -24,6 +24,8 @@ router.get('/api/post/:id', async (req, res) => {
 })
 
 router.post("/api/post", async (req, res) => {
+  const auth = req.cookies.jwt
+  console.log(auth)
   const doc = await PostModel.create(req.body);
   res.status(201).json(doc);
 });

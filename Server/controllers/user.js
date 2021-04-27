@@ -17,20 +17,18 @@ module.exports.login = async (req, res) => {
 
 
     /// jämför password från req och userns password i db 
-    const verified = bcrypt.compareSync(password, user.password)
-    if (!verified) {
-        return res.status(401).json('wrong password')
-    }
+    // const verified = bcrypt.compareSync(password, user.password)
+    // if (!verified) {
+    //     return res.status(401).json('wrong password')
+    // }
 
 
     // lägger till ett token på username som man sedan lägger i kakan
     // lägg super secret i en env fil för att den är superhemlig för att läsa av token
     const token = jwt.sign({ username: userName }, 'my super secret', { expiresIn: '365d' });
     return res.status(201).json(token)
-
-
-
 }
+
 module.exports.register = async (req, res) => {
     const { email, password } = req.body;
     /// users får tillbakka en array med req userName objekt!!!!
@@ -43,17 +41,17 @@ module.exports.register = async (req, res) => {
     // Hash the password and save the user
     const hashedPassword = await bcrypt.hash(password, 10);
     console.log()
-    // const Newuser = {
-    //     email: email,
-    //     password: hashedPassword
-    // }
+    const Newuser = {
+        email: email,
+        password: hashedPassword
+    }
 
-    // try {
-    //     const user = await UserModel.create(Newuser)
-    //     return res.status(201).json(user)
-    // } catch (err) {
-    //     return res.json({ message: err })
-    // }
+    try {
+        const user = await UserModel.create(Newuser)
+        return res.status(201).json(user)
+    } catch (err) {
+        return res.json({ message: err })
+    }
 
 
 }

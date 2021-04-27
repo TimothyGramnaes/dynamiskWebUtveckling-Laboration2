@@ -15,7 +15,7 @@ Content-Type: application/json
 
 {
     "email": "Oliver@hej.se",
-    "password": "mupparsle",
+    "password": "mupparsle"
 }
 
 ###
@@ -29,8 +29,12 @@ Content-Type: application/json
 
 {
     "email": "Oliver@hej.se",
-    "password": "mupparsle",
+    "password": "mupparsle"
 }
+
+###
+
+GET http://localhost:3001/api/user/auth
 
 ###
 
