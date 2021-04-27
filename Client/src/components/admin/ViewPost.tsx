@@ -2,31 +2,60 @@ import { useState } from "react"
 
 interface Posts {
     title:string,
-    content:string,
+    salt:string,
     id:number
 }
 
 function ViewPost() {
 
-    const data:Posts[] = [
-        {
-            title: 'Hej',
-            content: 'Lite text',
-            id: 1
-        },
-        {
-            title: 'Då',
-            content: 'Lite mer text',
-            id: 2
-        }
-    ]
+    const [posts, setPosts] = useState<Posts[]>([])
 
-    const [posts, setPosts] = useState<Posts[]>(data)
+    // const data:Posts[] = [
+    //     {
+    //         title: 'Hej',
+    //         content: 'Lite text',
+    //         id: 1
+    //     },
+    //     {
+    //         title: 'Då',
+    //         content: 'Lite mer text',
+    //         id: 2
+    //     }
+    // ]
+
+    const options = {
+        method: 'get'
+    }
+    // console.log(posts)
+    
+
+    const fetchPosts = async () => {
+        await fetch('/api/post', options)
+        .then(function (res){
+            if(res.status === 400) {
+            return
+            } 
+            // console.log(res)
+            return res.json()
+        })
+        .then(function (data) { 
+            // console.log(data)
+            
+            setPosts(data)
+        }).catch(function (err) {
+            console.log(err)
+    })
+    }
+
+    fetchPosts()
+    
+
+    
 
     const postsList = posts.map((p) => (
-        <div key="p.id">
+        <div>
             <h4>{p.title}</h4>
-            <p>{p.content}</p>
+            <p>{p.salt}</p>
             <div className="btn-container">
                 <button>Edit</button>
                 <button>Delete</button>
