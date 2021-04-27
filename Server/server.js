@@ -3,9 +3,11 @@ const mongoose = require("mongoose");
 const postRouter = require("./routers/post.router");
 const userRouter = require("./routers/user.router");
 const cookieSession = require('cookie-session');
+const cookieParser = require('cookie-parser')
 const bcrypt = require('bcrypt');
 
 const app = express();
+app.use(cookieParser())
 
 app.use(express.json());
 app.get("/", (req, res) => res.json("HÄÄÄÄÄÄÄÄÄÄJ!!!!"));
@@ -30,7 +32,7 @@ app.use((err, req, res, next) => {
 
 async function run() {
   try {
-    await mongoose.connect("", {
+    await mongoose.connect("mongodb+srv://dbAdmin:dbAdmin@clusterdev.9j1cn.mongodb.net/salt", {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
