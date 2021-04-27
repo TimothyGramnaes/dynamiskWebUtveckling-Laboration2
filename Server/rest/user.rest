@@ -15,8 +15,7 @@ Content-Type: application/json
 
 {
     "email": "Oliver@hej.se",
-    "password": "mupparsle",
-    "admin": "false"
+    "password": "mupparsle"
 }
 
 ###
@@ -26,6 +25,16 @@ Content-Type: application/json
 // skapa - lägga till cookie - SKA GÖRAS
 // Hur fungera - Jämför hashed lösenord för att gå vidare och sätta cookie - SKA GÖRAS
 POST http://localhost:3001/api/user/login
+Content-Type: application/json
+
+{
+    "email": "Oliver@hej.se",
+    "password": "mupparsle"
+}
+
+###
+
+GET http://localhost:3001/api/user/auth
 
 ###
 
@@ -47,12 +56,3 @@ Content-Type: application/json
 
 // VG
 DELETE http://localhost:3001/api/user/60816d3718d9ca0818fa418e
-###
-
-POST http://localhost:3001/api/user/login
-Content-Type: application/json
-
-{
-    "userName": "Nicklas",   
-    "password": "dansamedvargar"
-}

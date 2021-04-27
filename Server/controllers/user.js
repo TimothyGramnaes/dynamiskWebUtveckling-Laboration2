@@ -17,33 +17,32 @@ module.exports.login = async (req, res) => {
 
 
     /// jämför password från req och userns password i db 
-    const verified = bcrypt.compareSync(password, user.password)
-    if (!verified) {
-        return res.status(401).json('wrong password')
-    }
+    // const verified = bcrypt.compareSync(password, user.password)
+    // if (!verified) {
+    //     return res.status(401).json('wrong password')
+    // }
 
 
     // lägger till ett token på username som man sedan lägger i kakan
     // lägg super secret i en env fil för att den är superhemlig för att läsa av token
     const token = jwt.sign({ username: userName }, 'my super secret', { expiresIn: '365d' });
     return res.status(201).json(token)
-
-
-
 }
+
 module.exports.register = async (req, res) => {
-    const { userName, password } = req.body;
+    const { email, password } = req.body;
     /// users får tillbakka en array med req userName objekt!!!!
     // Check if the user already exists
-    const usernameExist = await UserModel.exists({ userName: userName })
+    const emailExist = await UserModel.exists({ email: email })
 
-    if (usernameExist) {
-        return res.status(400).json("Username already exists");
+    if (emailExist) {
+        return res.status(400).json("Email already exists");
     }
     // Hash the password and save the user
     const hashedPassword = await bcrypt.hash(password, 10);
+    console.log()
     const Newuser = {
-        userName: userName,
+        email: email,
         password: hashedPassword
     }
 

@@ -8,7 +8,7 @@ function App() {
     method: 'get'
 }
 
-fetch('/api/post', options)
+fetch('/api/admin/post', options)
 .then(function (res){
     if(res.status === 400) {
       return

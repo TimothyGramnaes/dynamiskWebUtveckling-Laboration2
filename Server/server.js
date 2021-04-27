@@ -3,9 +3,11 @@ const mongoose = require("mongoose");
 const postRouter = require("./routers/post.router");
 const userRouter = require("./routers/user.router");
 const cookieSession = require('cookie-session');
+const cookieParser = require('cookie-parser')
 const bcrypt = require('bcrypt');
 
 const app = express();
+app.use(cookieParser())
 
 app.use(express.json());
 app.get("/", (req, res) => res.json("HÄÄÄÄÄÄÄÄÄÄJ!!!!"));
