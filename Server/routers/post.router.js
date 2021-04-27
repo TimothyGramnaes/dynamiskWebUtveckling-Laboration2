@@ -18,12 +18,14 @@ router.get("/api/post", async (req, res) => {
 //   res.status(200).json(docs);
 // });
 router.get("/api/admin/post", async (req, res) => {
+
+  const auth = req.cookies.jwt
  
   const user = 2 // Token id from cookie
-  const admin = true // ModelPost.user.Id == ture || false
+  const admin = false // ModelPost.user.Id == ture || false
 
   if(!admin) {
-     const docs = await PostModel.find({ authorKey: user});
+     const docs = await PostModel.find({ userId: auth});
      res.status(200).json(docs)
   } else if (admin) {
     const docs = await PostModel.find();

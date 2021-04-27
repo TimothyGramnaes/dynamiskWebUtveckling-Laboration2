@@ -59,18 +59,11 @@ router.get('/api/user/auth', async (req, res) => {
   res.status(200).json(auth)
 })
 
-
-
-
-
 router.get("/api/user", async (req, res) => {
   // console.log(req.cookieSession)
   const docs = await UserModel.find({});
   res.status(200).json(docs);
 });
-
-
-
 
 
 // Delete one item with ID
