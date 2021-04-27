@@ -8,17 +8,7 @@ function App() {
     method: 'get'
 }
 
-fetch('api/user/auth', options)
-.then(function (res){
-    return res.json()
-})
-.then(function (data) { 
-  console.log(data)
-}).catch(function (err) {
-  console.log(err)
-})
-
-fetch('/api/post', options)
+fetch('/api/admin/post', options)
 .then(function (res){
     if(res.status === 400) {
       return
