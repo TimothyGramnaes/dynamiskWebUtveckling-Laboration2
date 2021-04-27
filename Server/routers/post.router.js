@@ -12,10 +12,10 @@ router.get("/api/post", async (req, res) => {
 });
 
 // Get user specific posts
-router.get("/api/post", async (req, res) => {
-  const docs = await PostModel.find().populate("userId");
-  res.status(200).json(docs);
-});
+// router.get("/api/post", async (req, res) => {
+//   const docs = await PostModel.find().populate("userId");
+//   res.status(200).json(docs);
+// });
 
 // Get one item
 router.get('/api/post/:id', async (req, res) => {
@@ -23,10 +23,15 @@ router.get('/api/post/:id', async (req, res) => {
   res.status(200).json(docs);
 })
 
-router.post("/api/post", async (req, res) => {
+router.post("/api/admin/post", async (req, res) => {
   const auth = req.cookies.jwt
   console.log(auth)
-  const doc = await PostModel.create(req.body);
+  const post = {
+    userId: auth,
+    title: req.body.title,
+    salt: req.body.salt,
+  }
+  const doc = await PostModel.create(post);
   res.status(201).json(doc);
 });
 

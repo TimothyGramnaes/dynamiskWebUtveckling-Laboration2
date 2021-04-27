@@ -14,12 +14,10 @@ GET http://localhost:3001/api/admin/post
 ###
 
 // Skapa inlägg - FIXAD
-POST http://localhost:3001/api/post
+POST http://localhost:3001/api/admin/post
 Content-Type: application/json
 
 {
-    "authorKey": "1",
-    "author": "Tim",
     "title": "Rubrik",
     "salt": "Massa Häxor"
 }
@@ -31,8 +29,7 @@ PUT http://localhost:3001/api/admin/post/608163124e6aad6244ba7508
 Content-Type: application/json
 
 {
-    "authorKey": "1",
-    "author": "CiiD",
+    "userId": "CiiD",
     "title": "Rubrik",
     "salt": "Massa Lorem"
 }

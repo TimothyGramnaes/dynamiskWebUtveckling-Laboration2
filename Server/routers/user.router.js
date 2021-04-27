@@ -52,8 +52,9 @@ router.post('/api/user/login', async (req, res) => {
 
 })
 
-router.get('/api/user/auth', (req, res) => {
-  const auth = req.cookies.jwt
+router.get('/api/user/auth', async (req, res) => {
+
+  const auth = await req.cookies.jwt
   console.log(auth)
   res.status(200).json(auth)
 })
