@@ -32,27 +32,28 @@ module.exports.login = async (req, res) => {
 
 }
 module.exports.register = async (req, res) => {
-    const { userName, password } = req.body;
+    const { email, password } = req.body;
     /// users får tillbakka en array med req userName objekt!!!!
     // Check if the user already exists
-    const usernameExist = await UserModel.exists({ userName: userName })
+    const emailExist = await UserModel.exists({ email: email })
 
-    if (usernameExist) {
-        return res.status(400).json("Username already exists");
+    if (emailExist) {
+        return res.status(400).json("Email already exists");
     }
     // Hash the password and save the user
     const hashedPassword = await bcrypt.hash(password, 10);
-    const Newuser = {
-        userName: userName,
-        password: hashedPassword
-    }
+    console.log()
+    // const Newuser = {
+    //     email: email,
+    //     password: hashedPassword
+    // }
 
-    try {
-        const user = await UserModel.create(Newuser)
-        return res.status(201).json(user)
-    } catch (err) {
-        return res.json({ message: err })
-    }
+    // try {
+    //     const user = await UserModel.create(Newuser)
+    //     return res.status(201).json(user)
+    // } catch (err) {
+    //     return res.json({ message: err })
+    // }
 
 
 }

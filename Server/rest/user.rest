@@ -16,7 +16,6 @@ Content-Type: application/json
 {
     "email": "Oliver@hej.se",
     "password": "mupparsle",
-    "admin": "false"
 }
 
 ###
@@ -26,6 +25,12 @@ Content-Type: application/json
 // skapa - lägga till cookie - SKA GÖRAS
 // Hur fungera - Jämför hashed lösenord för att gå vidare och sätta cookie - SKA GÖRAS
 POST http://localhost:3001/api/user/login
+Content-Type: application/json
+
+{
+    "email": "Oliver@hej.se",
+    "password": "mupparsle",
+}
 
 ###
 

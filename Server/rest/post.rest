@@ -14,7 +14,7 @@ GET http://localhost:3001/api/admin/post
 ###
 
 // Skapa inlägg - FIXAD
-POST http://localhost:3001/api/admin/post
+POST http://localhost:3001/admin/post
 Content-Type: application/json
 
 {
