@@ -20,8 +20,9 @@ router.get("/api/post", async (req, res) => {
 router.get("/api/admin/post", async (req, res) => {
 
   const auth = req.cookies.jwt
+  console.log(auth)
  
-  const admin = false // ModelPost.user.Id == ture || false
+  const admin = false // ModelPost.user.Id == trure || false
 
   if(!admin) {
      const docs = await PostModel.find({ userId: auth});
@@ -47,8 +48,8 @@ router.post("/api/admin/post", async (req, res) => {
   const auth = req.cookies.jwt
   const post = {
     userId: auth,
-    title: req.body.formTitle,
-    salt: req.body.formContent,
+    title: req.body.title,
+    content: req.body.content,
   }
   const doc = await PostModel.create(post);
   res.status(201).json(doc);

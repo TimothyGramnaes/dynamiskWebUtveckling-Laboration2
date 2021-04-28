@@ -19,7 +19,7 @@ Content-Type: application/json
 
 {
     "title": "Rubrik",
-    "salt": "Massa Häxor"
+    "content": "Massa Häxor"
 }
 
 ###
@@ -31,7 +31,7 @@ Content-Type: application/json
 {
     "userId": "CiiD",
     "title": "Rubrik",
-    "salt": "Massa Lorem"
+    "content": "Massa Lorem"
 }
 
 ###
