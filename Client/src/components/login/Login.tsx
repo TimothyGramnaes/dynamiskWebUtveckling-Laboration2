@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {useHistory} from 'react-router-dom'
 import TextField from "@material-ui/core/TextField";
 import { Button } from "@material-ui/core";
+import './login.css'
 
 function LoginComponent() {
 
@@ -47,7 +48,16 @@ function LoginComponent() {
   }
 
   return (
-    <form style={{ border: "1px solid black", width: "30rem" }} action="">
+    <>
+
+    <div className="login-container">
+
+    
+
+    <div className="form-container">
+
+    
+    <form action="">
       <h3 style={{ padding: "1rem" }}>LOGIN</h3>
       <div style={{ width: "100%", display: "flex", flexDirection: "column" }}>
         <TextField
@@ -91,6 +101,9 @@ function LoginComponent() {
         Sign up
       </Button>
     </form>
+    </div>
+    </div>
+    </>
   );
 }
 
