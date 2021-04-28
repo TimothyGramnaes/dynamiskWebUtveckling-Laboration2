@@ -1,8 +1,11 @@
 import  React, { useEffect, useState } from 'react'
-import  { Redirect, Route } from 'react-router-dom'
+import  { Route } from 'react-router-dom'
 import Admin from '../admin/Admin'
+import {useHistory} from 'react-router-dom'
+import Login from '../login/Login'
 
 function AuthUser({...rest}) {   
+    const history = useHistory()
     const [auth, setAuth] = useState<boolean>()
 
     useEffect(() => {
@@ -10,17 +13,17 @@ function AuthUser({...rest}) {
             method: 'get'
         }
         fetch('/api/user/auth', options)
-        .then(function (res){
-            console.log(res.ok)
-            setAuth(res.ok)                   
-              
+        .then(function (res){  
+            console.log(res)         
+                setAuth(res.ok)    
+                           
         })
         .catch(function (err) {
             console.log(err)
         })
-    }, [setAuth])
+    }, [setAuth, auth])
 
-    console.log({auth})
+
     if (auth === undefined) {
         return null;
     }
@@ -30,7 +33,7 @@ function AuthUser({...rest}) {
         <Route {...rest} render={ () => {
             return auth === true
             ? <Admin />
-            : <Redirect to="/login" />
+            : <Login />
         }} />
         
     )       

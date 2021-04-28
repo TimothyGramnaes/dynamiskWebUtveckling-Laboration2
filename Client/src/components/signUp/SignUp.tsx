@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import { Button } from "@material-ui/core";
-import {useHistory} from 'react-router-dom'
+import {Link, useHistory} from 'react-router-dom'
 
 
 function SignUpComponent() {
@@ -82,7 +82,7 @@ function SignUpComponent() {
       >
         SIGN UP
       </Button>
-      <Button style={{ margin: "1rem" }} variant="outlined" color="secondary">
+      <Button style={{ margin: "1rem" }} variant="outlined" color="secondary" href="/">
         CANCEL
       </Button>
       <p style={{ padding: "1rem" }}>Already have an account?</p>
@@ -90,7 +90,7 @@ function SignUpComponent() {
         style={{ margin: "1rem" }}
         variant="outlined"
         color="primary"
-        href=""
+        href="/login"
       >
         LOG IN
       </Button>
