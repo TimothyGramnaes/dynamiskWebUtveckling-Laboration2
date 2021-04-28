@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import {useHistory} from 'react-router-dom'
 import TextField from "@material-ui/core/TextField";
 import { Button } from "@material-ui/core";
 
@@ -7,6 +7,7 @@ function LoginComponent() {
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const history = useHistory()
   
 
   const handleUserChange = (e:any) => {
@@ -33,6 +34,9 @@ function LoginComponent() {
       fetch('/api/user/login', options
       ).then((response)=>{
         console.log(response)
+        if (response.ok) {
+          history.push('/admin')
+        }
           return response.text();
       }).then((text) => {
           console.log(text)

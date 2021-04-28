@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
-import { Link, Redirect } from 'react-router-dom'
+import { Link, Redirect, useHistory } from 'react-router-dom'
 import './header.css'
 
 function Header() {
   const [auth, setAuth] = useState<boolean>()
+  const history = useHistory()
+
 
   useEffect(() => {
     fetch('api/user/auth', { method: 'GET' })
@@ -29,6 +31,9 @@ function Header() {
     fetch('/api/user/logout', { method: 'GET' })
       .then((response) => {
         console.log(response)
+        if (response.ok) {
+          history.push('/')
+        }
       })
       .catch((err) => {
         console.log(err)
