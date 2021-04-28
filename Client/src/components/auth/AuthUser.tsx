@@ -3,15 +3,9 @@ import  { Redirect, Route } from 'react-router-dom'
 import Admin from '../admin/Admin'
 
 function AuthUser({...rest}) {   
-    const [auth, setAuth] = useState<boolean>()
+    const [auth, setAuth] = useState<boolean>(false)
 
-    // const view = () => {                        
-    //         // if(auth === false) {
-    //             <Admin />
-    //         // } else  {
-    //         //     <Redirect to="/admin" />
-    //         // } 
-    //     }
+    
 
     const options = {
         method: 'get'
@@ -20,24 +14,26 @@ function AuthUser({...rest}) {
     fetch('/api/user/auth', options)
     .then(function (res){
         if (res.status === 200) {
-            setAuth(true);                    
+            setAuth(res.ok)                   
         } else {
-            setAuth(false)
+            setAuth(res.ok)
         }        
     })
     .catch(function (err) {
         console.log(err)
     })   
-    useEffect(() => {        
+    
 
-          
-    })   
+
+    
 
     return (
         
-        <Route {...rest} render={() => {
+        <Route {...rest} render={ () => {
             console.log(auth)
-            return <Admin />
+            return auth === true
+            ? <Admin />
+            : <Redirect to="/login" />
         }} />
         
     )       

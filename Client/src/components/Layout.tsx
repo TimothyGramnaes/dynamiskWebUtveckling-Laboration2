@@ -37,8 +37,7 @@ function Layout() {
   return (
     <BrowserRouter>      
       <Header />
-      <Login />
-      <SignUp />
+
       <Switch>
         <AuthUser path="/admin" />
         <Route path="/signup" component={SignUp} />

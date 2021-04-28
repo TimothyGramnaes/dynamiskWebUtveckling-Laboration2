@@ -32,6 +32,7 @@ function LoginComponent() {
       
       fetch('/api/user/login', options
       ).then((response)=>{
+        console.log(response)
           return response.text();
       }).then((text) => {
           console.log(text)

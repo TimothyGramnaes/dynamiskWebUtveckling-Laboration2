@@ -2,32 +2,17 @@ import { useState } from "react"
 
 interface Posts {
     title:string,
-    salt:string,
-    id:number
+    content:string,
+    _id:number
 }
 
 function ViewPost() {
 
     const [posts, setPosts] = useState<Posts[]>([])
 
-    // const data:Posts[] = [
-    //     {
-    //         title: 'Hej',
-    //         content: 'Lite text',
-    //         id: 1
-    //     },
-    //     {
-    //         title: 'Då',
-    //         content: 'Lite mer text',
-    //         id: 2
-    //     }
-    // ]
-
     const options = {
         method: 'get'
-    }
-    // console.log(posts)
-    
+    }   
 
     const fetchPosts = async () => {
         await fetch('/api/post', options)
@@ -53,11 +38,12 @@ function ViewPost() {
     
 
     const postsList = posts.map((p) => (
-        <div>
+        <div key={p._id}>
             <h4>{p.title}</h4>
-            <p>{p.salt}</p>
+            <p>{p.content}</p>
             <div className="btn-container">
-                <button>Edit</button>
+                <button onClick= {() => console.log(p._id)}>                
+                    Edit</button>
                 <button>Delete</button>
             </div>
         </div>
