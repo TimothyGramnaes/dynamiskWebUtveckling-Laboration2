@@ -44,7 +44,7 @@ function Layout() {
         <Route path="/signup" component={SignUp} />
         <Route path="/login" component={Login} />
         <Route path="/" component={Hero} />
-        <LandingPage />
+        
       </Switch>
       
       <Footer />

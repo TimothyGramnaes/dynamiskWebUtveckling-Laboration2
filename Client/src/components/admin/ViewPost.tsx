@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 interface Posts {
     title:string,
@@ -10,31 +10,35 @@ function ViewPost() {
 
     const [posts, setPosts] = useState<Posts[]>([])
 
-    const options = {
-        method: 'get'
-    }   
-
-    const fetchPosts = async () => {
-        await fetch('/api/post', options)
-        .then(function (res){
-            if(res.status === 400) {
-            return
-            } 
-            // console.log(res)
-            return res.json()
-        })
-        .then(function (data) { 
-            // console.log(data)
-            
-            setPosts(data)
-        }).catch(function (err) {
-            console.log(err)
-    })
-    }
-
-    fetchPosts()
     
 
+    useEffect(() => {
+        const options = {
+            method: 'get'
+        }   
+        const fetchPosts = async () => {
+            await fetch('/api/admin/post', options)
+            .then(function (res){
+                if(res.status === 400) {
+                return
+                } 
+                // console.log(res)
+                return res.json()
+            })
+            .then(function (data) { 
+                // console.log(data)
+                
+                setPosts(data)
+            }).catch(function (err) {
+                console.log(err)
+        })
+        }
+    
+        fetchPosts()
+    })
+    
+    
+    console.log(posts)
     
 
     const postsList = posts.map((p) => (
