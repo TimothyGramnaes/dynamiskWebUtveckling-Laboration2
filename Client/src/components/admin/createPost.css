@@ -1,8 +1,8 @@
 .create-post-container {
-  background: rgb(235, 235, 235);
+  background: rgb(242, 242, 242);
   width: fit-content;
   padding: 2rem 4rem;
-  border-radius: 8px;
+  border-radius: 12px;
   margin: 3rem auto;
 }
 
@@ -31,13 +31,14 @@
 }
 
 .inputField button {
-  margin-top: 2rem;
   border: 2px solid black;
   border-radius: 100px;
   font-family: 'Montserrat';
   font-weight: 700;
   background: black;
   color: white;
+  width: 16rem;
+  margin: 2rem auto 0 auto;
 }
 
 .inputField button:hover {
