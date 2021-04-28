@@ -7,12 +7,12 @@ function Header() {
     <header>
       <h2 className="logo">Salt<b>Factory</b></h2>
       <div className="buttons">
-      <Link to="/login">
-        <button className="log-in">Log In</button>
-      </Link>
-      <Link to="/signup">
-        <button className="sign-up border-btn">Sign Up</button>
-      </Link>
+        <Link to="/login">
+          <button className="log-in">Log In</button>
+        </Link>
+        <Link to="/signup">
+          <button className="sign-up border-btn">Sign Up</button>
+        </Link>
       </div>
     </header>
   )
