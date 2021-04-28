@@ -133,6 +133,7 @@ function ViewPost() {
       <div>
         <div className="create-post-container">
           <h3>Create Post</h3>
+          <h5>Share your philosophical, salty thoughts with the world</h5>
           <form action="/api" method="post" className="inputField">
             <TextField
               className="title-input"

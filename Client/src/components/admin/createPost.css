@@ -11,8 +11,22 @@
   flex-direction: column;
 }
 
+.create-post-container h3 {
+  font-size: 2.5rem;
+  margin: 1.5rem auto 0 auto;
+  font-weight: 800;
+  text-align: center;
+}
+.create-post-container h5 {
+  font-size: .8rem;
+  margin: .75rem auto;
+  font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
+  color: grey;
+}
+
 .title-input {
-  width: 20rem;
   margin-right: 2rem;
 }
 
@@ -24,4 +38,9 @@
   font-weight: 700;
   background: black;
   color: white;
+}
+
+.inputField button:hover {
+  background: rgb(67, 66, 66);
+  border-color: rgb(67, 66, 66);
 }
