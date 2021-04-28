@@ -24,7 +24,7 @@ router.get("/api/admin/post", async (req, res) => {
   const admin = false // ModelPost.user.Id == ture || false
 
   if(!admin) {
-     const docs = await PostModel.find({ userId: "olof%40tjena.se"});
+     const docs = await PostModel.find({ userId: auth});
      res.status(200).json(docs)
   } else if (admin) {
     const docs = await PostModel.find();
@@ -45,8 +45,6 @@ router.get('/api/post/:id', async (req, res) => {
 
 router.post("/api/admin/post", async (req, res) => {
   const auth = req.cookies.jwt
-  console.log(auth)
-  console.log(req.body)
   const post = {
     userId: auth,
     title: req.body.formTitle,

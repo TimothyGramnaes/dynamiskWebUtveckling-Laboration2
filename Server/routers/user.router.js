@@ -49,7 +49,7 @@ router.post('/api/user/login', async (req, res) => {
 
   try {
     const token = createToken(email)
-    res.cookie('jwt', token, { httpOnly: true, maxAge: 6000 })
+    res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 })
     res.status(200).json(user)
   } catch (error) {
     console.log(error)
