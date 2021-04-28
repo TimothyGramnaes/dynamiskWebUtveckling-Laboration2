@@ -37,4 +37,4 @@ Content-Type: application/json
 ###
 
 // Fixa frontend o id hämtas
-DELETE http://localhost:3001/api/admin/post/id
+DELETE http://localhost:3001/api/post/id

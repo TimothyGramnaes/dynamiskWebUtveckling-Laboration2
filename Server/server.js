@@ -34,7 +34,7 @@ app.use((err, req, res, next) => {
 async function run() {
   try {
     await mongoose.connect(
-      "mongodb+srv://timpa:slarvkorv@cluster0.ddegw.mongodb.net/saltfactory",
+      "mongodb+srv://first-test-user:1000Tunland@cluster0.97bq1.mongodb.net/test",
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,
