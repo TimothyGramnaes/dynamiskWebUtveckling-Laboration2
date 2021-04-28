@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react'
 import { Link, Redirect, useHistory } from 'react-router-dom'
 import './header.css'
+import { useAuthContext } from "../context/authContext"
 
 function Header() {
-  const [auth, setAuth] = useState<boolean>()
+  const getAuthContext = useAuthContext();
+  const [auth, setAuth] = useState<boolean>(getAuthContext.auth)
   const history = useHistory()
 
-
   useEffect(() => {
+    
     fetch('api/user/auth', { method: 'GET' })
     .then(function (res) {
       if (res.status === 200) {
@@ -19,7 +21,7 @@ function Header() {
     .catch(function (err) {
       console.log(err)
     })
-  }, [setAuth])
+  }, [getAuthContext.auth, setAuth])
 
   // if (auth === undefined) {
   //   return null

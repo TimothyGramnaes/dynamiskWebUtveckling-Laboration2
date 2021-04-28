@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import {useHistory} from 'react-router-dom'
 import TextField from "@material-ui/core/TextField";
 import { Button } from "@material-ui/core";
+import { useAuthContext } from "../context/authContext"
 
 function LoginComponent() {
-
+  const getAuthContext = useAuthContext();
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const history = useHistory()
@@ -35,6 +36,7 @@ function LoginComponent() {
       ).then((response)=>{
         console.log(response)
         if (response.ok) {
+          getAuthContext.getAuth(response.ok)  
           history.push('/admin')
         }
           return response.text();
