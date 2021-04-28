@@ -1,45 +1,83 @@
-import { useState } from "react"
+import { Button, TextField } from "@material-ui/core";
+import { useState, useEffect } from "react";
 
 interface Posts {
-    title:string,
-    content:string,
-    id:number
+  title: string;
+  content: string;
+  _id: number;
 }
 
 function ViewPost() {
+  const [posts, setPosts] = useState<Posts[]>([]);
+  //   const [title, setTitle] = useState("");
+  //   const [content, setContent] = useState("");
 
-    const data:Posts[] = [
-        {
-            title: 'Hej',
-            content: 'Lite text',
-            id: 1
-        },
-        {
-            title: 'Då',
-            content: 'Lite mer text',
-            id: 2
+  useEffect(() => {
+    fetchPosts();
+  }, [setPosts]); // setPosts
+
+  const fetchPosts = async () => {
+    await fetch("/api/post", { method: "GET" })
+      .then(function (res) {
+        if (res.status === 400) {
+          return;
         }
-    ]
+        // console.log(res)
+        return res.json();
+      })
+      .then(function (data) {
+        console.log([...data]);
 
-    const [posts, setPosts] = useState<Posts[]>(data)
+        setPosts(data);
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
+  };
 
-    const postsList = posts.map((p) => (
-        <div key="p.id">
-            <h4>{p.title}</h4>
-            <p>{p.content}</p>
-            <div className="btn-container">
-                <button>Edit</button>
-                <button>Delete</button>
-            </div>
-        </div>
-    ))
+  const deletePost = async (post: any) => {
+    // console.log("hejpa");
+    try {
+      const res = await fetch(`/api/post/${post._id}`, { method: "DELETE" });
+      //console.log(res);
+      filterPosts(res);
+    } catch (error) {
+      console.error(error);
+    }
 
-    return(
-        <div className="viewlist">
-            <h3>Your Posts</h3>
-            {postsList}
-        </div>
-    )
+    //  await fetch.deletePost
+    // setPosts(posts - post)
+  };
+
+  function filterPosts(data: any) {
+    console.log("posts");
+    let newPosts = [
+      ...posts.filter((item: any) => {
+        return item._id !== data._id;
+      }),
+    ];
+    console.log(posts);
+    setPosts([...newPosts]);
+    fetchPosts();
+  }
+
+  const postsList = posts.map((p) => (
+    <div key={p._id}>
+      <h4>{p.title}</h4>
+      <p>{p.content}</p>
+      <div className="btn-container">
+        <button onClick={() => deletePost(p)}>Delete</button>
+      </div>
+    </div>
+  ));
+
+  return (
+    <div className="viewlist">
+      <h3>Your Posts</h3>
+
+      {postsList}
+    </div>
+  );
 }
 
-export default ViewPost
+export default ViewPost;
