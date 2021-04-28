@@ -11,18 +11,16 @@ function AuthUser({...rest}) {
         }
         fetch('/api/user/auth', options)
         .then(function (res){
-            if (res.status === 200) {
-                setAuth(res.ok)                   
-            } else {
-                setAuth(res.ok)
-            }        
+            console.log(res.ok)
+            setAuth(res.ok)                   
+              
         })
         .catch(function (err) {
             console.log(err)
         })
     }, [setAuth])
 
-
+    console.log({auth})
     if (auth === undefined) {
         return null;
     }

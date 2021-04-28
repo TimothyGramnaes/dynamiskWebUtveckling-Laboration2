@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import { Button } from "@material-ui/core";
+import {useHistory} from 'react-router-dom'
+
 
 function SignUpComponent() {
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const history = useHistory()
   
 
   const handleUserChange = (e:any) => {
@@ -31,7 +34,10 @@ function SignUpComponent() {
       
       fetch('/api/user/register', options
       ).then((response)=>{
-          return response.text();
+        if (response.ok) {
+          history.push('/')
+        }
+        return response.text();
       }).then((text) => {
           console.log(text)
       }).catch((error) => {

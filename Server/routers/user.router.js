@@ -73,6 +73,11 @@ router.get("/api/user", async (req, res) => {
   res.status(200).json(docs);
 });
 
+router.get('/api/user/logout', (req, res) => {
+  res.cookie('jwt', '', { maxAge: 1 })
+  res.redirect('/')
+})
+
 
 // Delete one item with ID
 router.delete('/api/user/:id', async (req, res) => {
