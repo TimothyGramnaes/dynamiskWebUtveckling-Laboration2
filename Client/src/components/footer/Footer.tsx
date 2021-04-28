@@ -4,6 +4,7 @@ import linkIcon from '../../images/icons/link-icon.svg'
 import logInIcon from '../../images/icons/log-in-icon.svg'
 import emailIcon from '../../images/icons/email-icon.svg'
 import houseIcon from '../../images/icons/house-icon.svg'
+import { Link } from 'react-router-dom'
 
 function Footer() {
   return (
@@ -16,10 +17,10 @@ function Footer() {
             <img src={linkIcon} alt="Link"/>
           </a>
           <p className="divider">|</p>
-          <a href="https://fakeadress.com/">
+          <Link to="/login">
             Log In Here
             <img src={logInIcon} alt="Log In"/>
-          </a>
+          </Link>
         </div>
         <div className="contact-section">
           <a href="mailto:example@email.com">

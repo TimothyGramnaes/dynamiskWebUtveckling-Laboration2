@@ -58,10 +58,13 @@ router.post('/api/user/login', async (req, res) => {
 })
 
 router.get('/api/user/auth', async (req, res) => {
-
   const auth = await req.cookies.jwt
-  console.log(auth)
-  res.status(200).json(auth)
+  
+  if (!auth) {
+    res.status(401)
+  } else {
+    res.status(200).json(auth)
+  }
 })
 
 router.get("/api/user", async (req, res) => {
@@ -69,6 +72,11 @@ router.get("/api/user", async (req, res) => {
   const docs = await UserModel.find({});
   res.status(200).json(docs);
 });
+
+router.get('/api/user/logout', (req, res) => {
+  res.cookie('jwt', '', { maxAge: 1 })
+  res.redirect('/')
+})
 
 
 // Delete one item with ID
