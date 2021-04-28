@@ -37,3 +37,8 @@ header {
   background: transparent;
   border: 2px black solid;
 }
+
+header a {
+  text-decoration: none;
+  color: black;
+}

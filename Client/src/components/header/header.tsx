@@ -59,9 +59,11 @@ function Header() {
     )
   }
     
-    return (
-      <header>
-      <h2 className="logo">Salt<b>Factory</b></h2>
+  return (
+    <header>
+        <Link to="/">
+          <h2 className="logo">Salt<b>Factory</b></h2>
+        </Link>
       <div className="buttons">
 
         {auth === true ? (
