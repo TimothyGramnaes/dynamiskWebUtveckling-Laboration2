@@ -87,7 +87,7 @@ function LoginComponent() {
       >
         Log in
       </Button>
-      <Button style={{ margin: "1rem" }} variant="outlined" color="secondary">
+      <Button style={{ margin: "1rem" }} variant="outlined" color="secondary" href="/">
         Cancel
       </Button>
       <p style={{ padding: "1rem" }}>Dont't have an account yet?</p>
@@ -95,7 +95,7 @@ function LoginComponent() {
         style={{ margin: "1rem" }}
         variant="outlined"
         color="primary"
-        href=""
+        href="/signup"
         
       >
         Sign up

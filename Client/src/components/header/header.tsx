@@ -27,12 +27,14 @@ function Header() {
   
   const handleClick = (e:any) => {
     e.preventDefault()
+    setAuth(false)
     
     fetch('/api/user/logout', { method: 'GET' })
       .then((response) => {
         console.log(response)
         if (response.ok) {
           history.push('/')
+          
         }
       })
       .catch((err) => {
