@@ -1,8 +1,28 @@
+import { useEffect, useState } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import './header.css'
 
 function Header() {
+  // const [auth, setAuth] = useState<boolean>()
 
+  // useEffect(() => {
+  //   fetch('api/user/auth', { method: 'GET' })
+  //   .then(function (res) {
+  //     if (res.status === 200) {
+  //       setAuth(res.ok)
+  //     } else {
+  //       setAuth(res.ok)
+  //     }
+  //   })
+  //   .catch(function (err) {
+  //     console.log(err)
+  //   })
+  // }, [setAuth])
+
+  // if (auth === undefined) {
+  //   return null
+  // }
+  
   const handleClick = (e:any) => {
     e.preventDefault()
     
@@ -13,7 +33,7 @@ function Header() {
       .catch((err) => {
         console.log(err)
       })
-  }
+    }
     
     return (
       <header>
