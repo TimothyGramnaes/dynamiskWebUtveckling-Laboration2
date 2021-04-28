@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import {useHistory} from 'react-router-dom'
 import TextField from "@material-ui/core/TextField";
 import { Button } from "@material-ui/core";
+import './login.css'
+//import saltShaker from '../../images/salt.png';
 import { useAuthContext } from "../context/authContext"
 
 function LoginComponent() {
@@ -49,8 +51,18 @@ function LoginComponent() {
   }
 
   return (
-    <form style={{ border: "1px solid black", width: "30rem" }} action="">
+    <>
+
+    <div className="login-container">
+
+    
+
+    <div className="form-container">
+
+    
+    <form action="">
       <h3 style={{ padding: "1rem" }}>LOGIN</h3>
+      {/* <img className="salt-shaker" src={saltShaker} alt="Illustration"/> */}
       <div style={{ width: "100%", display: "flex", flexDirection: "column" }}>
         <TextField
           style={{ margin: "1rem" }}
@@ -67,32 +79,42 @@ function LoginComponent() {
           required
           id="password"
           label="Password"
+          type="password"
           defaultValue="password"
           value={password}
           onChange={handlePasswordChange}
           // variant="outlined"
         />
       </div>
-      <Button style={{ margin: "1rem" }} variant="outlined" color="primary"
-      type="submit"
-      onClick={handleClick}
-      >
-        Log in
-      </Button>
-      <Button style={{ margin: "1rem" }} variant="outlined" color="secondary" href="/">
-        Cancel
-      </Button>
-      <p style={{ padding: "1rem" }}>Dont't have an account yet?</p>
-      <Button
-        style={{ margin: "1rem" }}
-        variant="outlined"
-        color="primary"
-        href="/signup"
+      <div className="login-cancel-container">
+
+        <Button style={{ margin: "1rem" }} variant="outlined" color="primary"
+        type="submit"
+        onClick={handleClick}
+        >
+          Log in
+        </Button>
+        <Button style={{ margin: "1rem" }} variant="outlined" color="secondary" href="/">
+          Cancel
+        </Button>
+      </div>
+      <div className="sign-up-container">
+
+        <p style={{ padding: "1rem" }}>Dont't have an account yet?</p>
+        <Button
+          style={{ margin: "1rem" }}
+          variant="outlined"
+          color="primary"
+          href="/signup"
         
-      >
-        Sign up
-      </Button>
+          >
+          Sign up
+        </Button>
+      </div>
     </form>
+    </div>
+    </div>
+    </>
   );
 }
 

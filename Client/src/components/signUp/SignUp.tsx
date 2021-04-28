@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import { Button } from "@material-ui/core";
 import {Link, useHistory} from 'react-router-dom'
+import './signup.css'
 
 
 function SignUpComponent() {
@@ -46,11 +47,17 @@ function SignUpComponent() {
           console.log(e)
   }
   return (
+    <>
+
+  <div className="signup-container">
+
+    
+
+      <div className="form-container">
+
+
     <form
-      style={{
-        border: "1px solid black",
-        width: "30rem",
-      }}
+
       action=""
     >
       <h3 style={{ padding: "1rem" }}>CREATE ACCOUNT</h3>
@@ -69,6 +76,7 @@ function SignUpComponent() {
           style={{ margin: "1rem" }}
           required
           id="password"
+          type="password"
           label="Password"
           defaultValue="password"
           value={password}
@@ -76,6 +84,8 @@ function SignUpComponent() {
           // variant="outlined"
         />
       </div>
+      <div className="signup-cancel-container">
+
       <Button style={{ margin: "1rem" }} variant="outlined" color="primary"
       type="submit"
       onClick={handleClick}
@@ -85,16 +95,23 @@ function SignUpComponent() {
       <Button style={{ margin: "1rem" }} variant="outlined" color="secondary" href="/">
         CANCEL
       </Button>
+      </div>
+      <div className="smart-container">
       <p style={{ padding: "1rem" }}>Already have an account?</p>
       <Button
         style={{ margin: "1rem" }}
         variant="outlined"
         color="primary"
         href="/login"
-      >
+        >
         LOG IN
       </Button>
+        </div>
     </form>
+
+    </div>
+  </div>
+  </>
   );
 }
 
