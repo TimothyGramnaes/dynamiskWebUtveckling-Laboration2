@@ -61,11 +61,11 @@ function LoginComponent() {
 
     
     <form action="">
-      <h3 style={{ padding: "1rem" }}>LOGIN</h3>
+      <h3 className="login-title">LOGIN</h3>
       {/* <img className="salt-shaker" src={saltShaker} alt="Illustration"/> */}
       <div style={{ width: "100%", display: "flex", flexDirection: "column" }}>
         <TextField
-          style={{ margin: "1rem" }}
+          style={{ margin: "1rem 0" }}
           required
           id="email"
           label="Username"
@@ -75,7 +75,7 @@ function LoginComponent() {
           // variant="outlined"
         />
         <TextField
-          style={{ margin: "1rem" }}
+          style={{ margin: "1rem 0" }}
           required
           id="password"
           label="Password"

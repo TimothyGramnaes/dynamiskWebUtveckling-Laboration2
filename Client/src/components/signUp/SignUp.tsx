@@ -60,7 +60,7 @@ function SignUpComponent() {
 
       action=""
     >
-      <h3 style={{ padding: "1rem" }}>CREATE ACCOUNT</h3>
+      <h3 className="create-account-title">CREATE ACCOUNT</h3>
       <div style={{ width: "100%", display: "flex", flexDirection: "column" }}>
       <TextField
           style={{ margin: "1rem" }}

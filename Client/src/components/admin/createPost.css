@@ -1,0 +1,43 @@
+.create-post-container {
+  background: rgb(242, 242, 242);
+  width: fit-content;
+  padding: 2rem 4rem;
+  border-radius: 12px;
+  margin: 3rem auto;
+}
+
+.inputField {
+  display: flex;
+  flex-direction: column;
+}
+
+.create-post-container h3 {
+  font-size: 2.5rem;
+  margin: 1.5rem auto 0 auto;
+  font-weight: 800;
+  text-align: center;
+}
+.create-post-container h5 {
+  font-size: .8rem;
+  margin: .75rem auto;
+  font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
+  color: grey;
+}
+
+.inputField button {
+  border: 2px solid black;
+  border-radius: 100px;
+  font-family: 'Montserrat';
+  font-weight: 700;
+  background: black;
+  color: white;
+  width: 16rem;
+  margin: 2rem auto 0 auto;
+}
+
+.inputField button:hover {
+  background: rgb(67, 66, 66);
+  border-color: rgb(67, 66, 66);
+}
