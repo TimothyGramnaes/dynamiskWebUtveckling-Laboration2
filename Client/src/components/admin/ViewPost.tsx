@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import './posts.css'
 
 interface Posts {
     title:string,
@@ -38,23 +39,27 @@ function ViewPost() {
     })
     
     
-    console.log(posts)
+    // console.log(posts)
     
 
     const postsList = posts.map((p) => (
-        <div key={p._id}>
-            <h4>{p.title}</h4>
-            <p>{p.content}</p>
-            <div className="btn-container">
-                <button onClick= {() => console.log(p._id)}>                
-                    Edit</button>
-                <button>Delete</button>
+        
+        <div className="your-posts-container" key={p._id}>
+            <div className="post-container">
+                <h4>{p.title}</h4>
+                <p>{p.content}</p>
+                    <div className="breaker"></div>
+                <div className="btn-container">
+                    <button onClick= {() => console.log(p._id)}>                
+                        Edit</button>
+                    <button>Delete</button>
+                </div>
             </div>
         </div>
     ))
 
     return(
-        <div className="viewlist">
+        <div className="view-container">
             <h3>Your Posts</h3>
             {postsList}
         </div>
