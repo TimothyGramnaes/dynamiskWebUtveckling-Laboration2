@@ -17,10 +17,7 @@ router.get("/api/post", async (req, res) => {
 //   res.status(200).json(docs);
 // });
 router.get("/api/admin/post", async (req, res) => {
-  const auth = req.cookies.jwt;
-
-  const auth = req.cookies.jwt;
-
+ 
   const auth = req.cookies.jwt
   console.log(auth)
  

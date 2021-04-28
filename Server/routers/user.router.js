@@ -37,7 +37,7 @@ router.post('/api/user/login', async (req, res) => {
   const maxAge = 1 * 24 * 60 * 60
 
   const user = await UserModel.exists({ email: email })
-
+  console.log('woot')
   const createToken = (id) => {
     return jwt.sign(id, 'magic secret')
   }
