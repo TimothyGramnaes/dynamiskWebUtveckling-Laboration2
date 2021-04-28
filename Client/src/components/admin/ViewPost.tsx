@@ -1,5 +1,6 @@
 import { Button, TextField } from "@material-ui/core";
 import { useState, useEffect } from "react";
+import './createPost.css'
 
 interface Posts {
   title: string;
@@ -134,14 +135,16 @@ function ViewPost() {
           <h3>Create Post</h3>
           <form action="/api" method="post" className="inputField">
             <TextField
+              className="title-input"
               label="Title"
               id="formTitle"
-              multiline
+              
               rows={10}
               value={title}
               onChange={handleTitleChange}
             />
             <TextField
+              className="content-input"
               label="Message"
               id="formContent"
               multiline

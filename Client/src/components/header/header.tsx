@@ -48,7 +48,7 @@ function Header() {
     return (
       <>
         <Link to='/admin'>
-          <button className="admin-btn">Salt Feed</button>
+          <button className="admin-btn">Your Salt Feed</button>
         </Link>
         <button onClick={handleClick} className="border-btn">Log Out</button>
       </>
