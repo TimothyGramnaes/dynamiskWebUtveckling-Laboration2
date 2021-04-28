@@ -17,15 +17,15 @@ router.get("/api/post", async (req, res) => {
 //   res.status(200).json(docs);
 // });
 router.get("/api/admin/post", async (req, res) => {
-  const auth = req.cookies.jwt;
+ 
+  const auth = req.cookies.jwt
+  console.log(auth)
+ 
+  const admin = false // ModelPost.user.Id == trure || false
 
-  const auth = req.cookies.jwt;
-
-  const admin = false; // ModelPost.user.Id == ture || false
-
-  if (!admin) {
-    const docs = await PostModel.find({ userId: "olof%40tjena.se" });
-    res.status(200).json(docs);
+  if(!admin) {
+     const docs = await PostModel.find({ userId: auth});
+     res.status(200).json(docs)
   } else if (admin) {
     const docs = await PostModel.find();
     res.status(200).json(docs);
@@ -41,14 +41,12 @@ router.get("/api/post/:id", async (req, res) => {
 });
 
 router.post("/api/admin/post", async (req, res) => {
-  const auth = req.cookies.jwt;
-  console.log(auth);
-  console.log(req.body);
+  const auth = req.cookies.jwt
   const post = {
     userId: auth,
-    title: req.body.formTitle,
-    salt: req.body.formContent,
-  };
+    title: req.body.title,
+    content: req.body.content,
+  }
   const doc = await PostModel.create(post);
   res.status(201).json(doc);
 });

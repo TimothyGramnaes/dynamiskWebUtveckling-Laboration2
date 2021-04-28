@@ -4,22 +4,22 @@ import { Button, TextField } from '@material-ui/core'
 
 function CreatePost() {
 
-    const [formTitle, setFormTitle] = useState("")
-    const [formContent, setFormContent] = useState("")
+    const [title, setTitle] = useState("")
+    const [content, setContent] = useState("")
     
 
     const handleTitleChange = (e:any) => {
-            setFormTitle(e.target.value)
+        setTitle(e.target.value)
     }
 
     const handleContentChange = (e:any) => {
-            setFormContent(e.target.value)
+        setContent(e.target.value)
     }
 
     const handleClick = (e:any) => {
         e.preventDefault();
 
-        const formData = {formTitle, formContent}
+        const formData = {title, content}
 
         const options = {
             method: 'post',
@@ -49,7 +49,7 @@ function CreatePost() {
                     id="formTitle"
                     multiline
                     rows={10}
-                    value={formTitle}
+                    value={title}
                     onChange={handleTitleChange}
                 />
                 <TextField 
@@ -57,7 +57,7 @@ function CreatePost() {
                     id="formContent"
                     multiline
                     rows={10}
-                    value={formContent}
+                    value={content}
                     onChange={handleContentChange}
                 />
                 <Button 

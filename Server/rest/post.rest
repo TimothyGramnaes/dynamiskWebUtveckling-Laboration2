@@ -18,8 +18,8 @@ POST http://localhost:3001/api/admin/post
 Content-Type: application/json
 
 {
-    "title": "Karn",
-    "salt": "lattice är lame"
+    "title": "Rubrik",
+    "content": "Massa Häxor"
 }
 
 ###
@@ -29,9 +29,9 @@ PUT http://localhost:3001/api/admin/post/6087fed805fcf11d9c37dad2
 Content-Type: application/json
 
 {
-    "userId": "Iron@maiden.se",
-    "title": "ooohooo",
-    "salt": "En jeffla massa lorem ipsum"
+    "userId": "CiiD",
+    "title": "Rubrik",
+    "content": "Massa Lorem"
 }
 
 ###
