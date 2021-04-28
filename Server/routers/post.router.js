@@ -5,7 +5,6 @@ const PostModel = require("../models/post.model");
 
 const router = express.Router();
 
-
 router.get("/api/post", async (req, res) => {
   const docs = await PostModel.find({});
 
@@ -18,55 +17,61 @@ router.get("/api/post", async (req, res) => {
 //   res.status(200).json(docs);
 // });
 router.get("/api/admin/post", async (req, res) => {
-
-  const auth = req.cookies.jwt
  
-  const admin = false // ModelPost.user.Id == ture || false
+  const auth = req.cookies.jwt
+  console.log(auth)
+ 
+  const admin = false // ModelPost.user.Id == trure || false
 
   if(!admin) {
-     const docs = await PostModel.find({ userId: "olof%40tjena.se"});
+     const docs = await PostModel.find({ userId: auth});
      res.status(200).json(docs)
   } else if (admin) {
     const docs = await PostModel.find();
-    res.status(200).json(docs)
+    res.status(200).json(docs);
   } else {
-    res.status(400).json('No Post')
+    res.status(400).json("No Post");
   }
-
 });
 
 // Get one item
-router.get('/api/post/:id', async (req, res) => {
-  
+router.get("/api/post/:id", async (req, res) => {
   const docs = await PostModel.findById(req.params.id);
   res.status(200).json(docs);
-})
-
+});
 
 router.post("/api/admin/post", async (req, res) => {
   const auth = req.cookies.jwt
-  console.log(auth)
-  console.log(req.body)
   const post = {
     userId: auth,
-    title: req.body.formTitle,
-    salt: req.body.formContent,
+    title: req.body.title,
+    content: req.body.content,
   }
   const doc = await PostModel.create(post);
   res.status(201).json(doc);
 });
 
+// Change a post
+router.put("/api/admin/post/:id", (req, res) => {
+  PostModel.findByIdAndUpdate({ _id: req.params.id }, req.body).then(
+    function () {
+      PostModel.findOne({ _id: req.params.id }).then(function (post) {
+        res.status(200).json(post);
+      });
+    }
+  );
+  // console.log(post);
+});
 
 // Delete one item with ID
-router.delete('/api/post/:id', async (req, res) => {
-
+router.delete("/api/post/:id", async (req, res) => {
   const doc = await PostModel.findById(req.params.id);
   PostModel.deleteOne(doc, (error) => {
     if (error) {
-      console.error(error)
-    } else return
-  })
-  console.log(doc)
-})
+      console.error(error);
+    } else return;
+  });
+  console.log(doc);
+});
 
 module.exports = router;

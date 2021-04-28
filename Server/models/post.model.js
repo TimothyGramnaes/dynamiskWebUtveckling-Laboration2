@@ -4,7 +4,7 @@ const postSchema = new mongoose.Schema(
   {
     userId: 'String',
     title: "String",
-    salt: "String",
+    content: "String",
   },
   {
     timestamps: true,

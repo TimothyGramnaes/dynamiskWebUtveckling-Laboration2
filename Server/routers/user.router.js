@@ -8,7 +8,6 @@ const cookie = require('cookie-parser')
 
 const userController = require('../controllers/user')
 
-
 router.post('/api/user/register', async (req, res) => {
   console.log(req.body)
   const { email, password } = req.body;
@@ -35,8 +34,13 @@ router.post('/api/user/register', async (req, res) => {
 
 router.post('/api/user/login', async (req, res) => {
   const { email, password } = req.body;
+  const maxAge = 1 * 24 * 60 * 60
 
   const user = await UserModel.exists({ email: email })
+  console.log('woot')
+  const createToken = (id) => {
+    return jwt.sign(id, 'magic secret')
+  }
 
   if (!user) {
     // om ingen användare finns returnerar vi ett error
@@ -44,7 +48,8 @@ router.post('/api/user/login', async (req, res) => {
   }
 
   try {
-    res.cookie('jwt', 'nicklas', { httpOnly: true })
+    const token = createToken(email)
+    res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 })
     res.status(200).json(user)
   } catch (error) {
     console.log(error)

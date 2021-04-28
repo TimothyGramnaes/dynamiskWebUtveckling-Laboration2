@@ -19,19 +19,19 @@ Content-Type: application/json
 
 {
     "title": "Rubrik",
-    "salt": "Massa Häxor"
+    "content": "Massa Häxor"
 }
 
 ###
 
 // Ändra inlägg - SKA GÖRAS
-PUT http://localhost:3001/api/admin/post/608163124e6aad6244ba7508
+PUT http://localhost:3001/api/admin/post/6087fed805fcf11d9c37dad2
 Content-Type: application/json
 
 {
     "userId": "CiiD",
     "title": "Rubrik",
-    "salt": "Massa Lorem"
+    "content": "Massa Lorem"
 }
 
 ###
