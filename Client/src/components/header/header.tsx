@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link, Redirect, useHistory } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import './header.css'
 import { useAuthContext } from "../context/authContext"
 
@@ -44,13 +44,18 @@ function Header() {
       })
   }
 
-  function LogOutButton() {
+  function LoggedInButtons() {
     return (
-      <button onClick={handleClick} className="border-btn">Log Out</button>
+      <>
+        <Link to='/admin'>
+          <button className="admin-btn">Salt Feed</button>
+        </Link>
+        <button onClick={handleClick} className="border-btn">Log Out</button>
+      </>
     )
   }
 
-  function LogInAndSignUpButtons() {
+  function NotLoggedInButtons() {
     return (
       <>
         <Link to="/login">
@@ -71,9 +76,9 @@ function Header() {
       <div className="buttons">
 
         {auth === true ? (
-          <LogOutButton />
+          <LoggedInButtons />
         ) : (
-          <LogInAndSignUpButtons />
+          <NotLoggedInButtons />
         )}
         
       </div>

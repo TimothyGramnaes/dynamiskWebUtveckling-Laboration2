@@ -17,7 +17,7 @@ header {
   color: #FF7A00;
 }
 
-.log-in, .sign-up, .border-btn {
+.log-in, .sign-up, .border-btn, .admin-btn {
   border-radius: 100rem;
   padding: .5rem 1.5rem;
   font-family: 'Montserrat';
@@ -36,6 +36,12 @@ header {
 .border-btn {
   background: transparent;
   border: 2px black solid;
+}
+
+.admin-btn {
+  border: none;
+  margin-right: 1rem;
+  background: transparent;
 }
 
 header a {
