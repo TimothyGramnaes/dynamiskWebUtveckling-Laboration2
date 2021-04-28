@@ -1,70 +1,82 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './LandingPage.css'
 import { Grid } from '@material-ui/core';
+import { useState } from 'react';
+import { CSSProperties } from '@material-ui/styles';
 
 
 // import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 // import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 // import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
-import BloggPostComponent from '../bloggPost/BloggPost';
+// import BloggPostComponent from '../bloggPost/BloggPost';
 
 // import Button from '@material-ui/core/Button';
 
+interface Posts {
+    title:string,
+    content:string,
+    _id:number
+}
+
 function LandingPage() {
+
+    const postStyle: CSSProperties = {
+        display: "flex",
+        flexDirection: "column",
+        width: "100%",
+        maxWidth: '60rem',
+        margin: '1rem auto',
+        border: 'solid 1px black',
+        borderRadius: '5px',
+        padding: '0.5rem 2rem',
+    }
+
+    const [posts, setPosts] = useState<Posts[]>([])
+
+    useEffect(() => {
+
+        const options = {
+            method: 'get'
+        }   
+    
+    
+        const fetchPosts = async () => {
+            await fetch('/api/post', options)
+            .then(function (res){
+                if(res.status === 400) {
+                return
+                } 
+                // console.log(res)
+                return res.json()
+            })
+            .then(function (data) { 
+                // console.log(data)
+                
+                setPosts(data)
+            }).catch(function (err) {
+                console.log(err)
+        })
+        }
+    
+        fetchPosts()
+
+    })
+
+    const postsList = posts.map((p) => (
+        <div style={postStyle} key={p._id} >
+            <h4>{p.title}</h4>
+            <p>{p.content}</p>
+            
+        </div>
+    ))
     return(
         <Grid container className="layoutMainContainer">
             <Grid container>
-
-                <Grid container xs={6} md={6} className="search">
-                    <div  className="search-bar">
-                    
-                        <input className="text-input" type="text" name="search-salts" placeholder="Give your fellow magic players your salts" />                            
-                      
-                        <button className="search-btn" type="submit" value="post">POST</button>
-                    
-                    </div>
-                        
-                </Grid>
-                <Grid container xs={6} md={6}>
-                    <span>
-
-                    </span>
-                </Grid>
-            </Grid>
-
-            <Grid className="titles" container>
-                <Grid container xs={8} md={8}>
-                    <h3>
-                        Latest Posts
-                    </h3>
-                </Grid>
-                <Grid container xs={4} md={4}>
-                    <h3>
-                        Latest News
-                    </h3>
-                </Grid>
-
-            </Grid>
-
-            <Grid container>
-                <Grid className="posts-column-container" container xs={8} md={8}>
-                    <BloggPostComponent />
+            {postsList}
                 
 
-                </Grid>
-
-                <Grid container xs={4} md={4}>
-                    <h3>
-                        News
-                    </h3>
-                </Grid>
-
             </Grid>
-        <div>
-            <h2>
-                
-            </h2>
-        </div>
+       
         </Grid>
     )
 }

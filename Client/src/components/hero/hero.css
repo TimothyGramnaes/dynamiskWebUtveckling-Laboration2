@@ -2,6 +2,7 @@
   display: flex;
   padding: 1rem 6rem 6rem 6rem;
   align-items: center;
+  flex-direction:column
 }
 
 .hero-img {
