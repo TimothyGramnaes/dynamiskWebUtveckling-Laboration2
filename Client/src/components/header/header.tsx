@@ -13,6 +13,7 @@ function Header() {
         <Link to="/signup">
           <button className="sign-up border-btn">Sign Up</button>
         </Link>
+        <button className="border-btn">Log Out</button>
       </div>
     </header>
   )
