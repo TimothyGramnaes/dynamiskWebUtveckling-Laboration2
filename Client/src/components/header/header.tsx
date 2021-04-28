@@ -3,21 +3,21 @@ import { Link, Redirect } from 'react-router-dom'
 import './header.css'
 
 function Header() {
-  // const [auth, setAuth] = useState<boolean>()
+  const [auth, setAuth] = useState<boolean>()
 
-  // useEffect(() => {
-  //   fetch('api/user/auth', { method: 'GET' })
-  //   .then(function (res) {
-  //     if (res.status === 200) {
-  //       setAuth(res.ok)
-  //     } else {
-  //       setAuth(res.ok)
-  //     }
-  //   })
-  //   .catch(function (err) {
-  //     console.log(err)
-  //   })
-  // }, [setAuth])
+  useEffect(() => {
+    fetch('api/user/auth', { method: 'GET' })
+    .then(function (res) {
+      if (res.status === 200) {
+        setAuth(true)
+      } else {
+        setAuth(false)
+      }
+    })
+    .catch(function (err) {
+      console.log(err)
+    })
+  }, [setAuth])
 
   // if (auth === undefined) {
   //   return null
@@ -33,19 +33,38 @@ function Header() {
       .catch((err) => {
         console.log(err)
       })
-    }
-    
+  }
+
+  function LogOutButton() {
     return (
-      <header>
-      <h2 className="logo">Salt<b>Factory</b></h2>
-      <div className="buttons">
+      <button onClick={handleClick} className="border-btn">Log Out</button>
+    )
+  }
+
+  function LogInAndSignUpButtons() {
+    return (
+      <>
         <Link to="/login">
           <button className="log-in">Log In</button>
         </Link>
         <Link to="/signup">
           <button className="sign-up border-btn">Sign Up</button>
         </Link>
-        <button onClick={handleClick} className="border-btn">Log Out</button>
+      </>
+    )
+  }
+    
+    return (
+      <header>
+      <h2 className="logo">Salt<b>Factory</b></h2>
+      <div className="buttons">
+
+        {auth === true ? (
+          <LogOutButton />
+        ) : (
+          <LogInAndSignUpButtons />
+        )}
+        
       </div>
     </header>
   )
