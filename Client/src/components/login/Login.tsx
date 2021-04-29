@@ -11,6 +11,7 @@ function LoginComponent() {
   const history = useHistory()
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [emailError, setEmailError] = useState("");
 
   const handleUserChange = (e:any) => {
     setEmail(e.target.value)
@@ -23,7 +24,13 @@ function LoginComponent() {
   const handleClick = (e:any) => {
       e.preventDefault();
 
+      setEmailError('')
+
       const formData = {email, password}
+      if (email.length < 5) {
+        setEmailError('Email is too short')
+        return
+      }
 
       const options = {
           method: 'post',
@@ -38,6 +45,7 @@ function LoginComponent() {
           console.log(response)
           if (response.ok) {
             getAuthContext.getAuth(response.ok)  
+            alert('You are now logged in')
             history.push('/admin')
           }
           return response.text();
@@ -63,6 +71,7 @@ function LoginComponent() {
                 value={email}
                 onChange={handleUserChange}
               />
+              <p className="error-text">{emailError}</p>
               <TextField
                 style={{ margin: "1rem 0" }}
                 required

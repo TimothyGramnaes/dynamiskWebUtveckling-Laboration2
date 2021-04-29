@@ -8,6 +8,8 @@ function SignUpComponent() {
 
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   const history = useHistory()
 
   const handleUserChange = (e:any) => {
@@ -21,7 +23,18 @@ function SignUpComponent() {
   const handleClick = (e:any) => {
       e.preventDefault();
 
+      setEmailError('')
+      setPasswordError('')
+
       const formData = {email, password}
+      if (email.length < 5) {
+        setEmailError('Email is too short')
+        return
+      }
+      if (password.length < 6) {
+        setPasswordError('Your password must contain at least 6 characters')
+        return
+      }
 
       const options = {
           method: 'post',
@@ -34,6 +47,7 @@ function SignUpComponent() {
       fetch('/api/user/register', options)
         .then((response)=>{
           if (response.ok) {
+            alert('User created')
             history.push('/')
           }
           return response.text();
@@ -59,6 +73,7 @@ function SignUpComponent() {
                 value={email}
                 onChange={handleUserChange}
               />
+              <p className="error-text">{emailError}</p>
               <TextField
                 style={{ margin: "1rem" }}
                 required
@@ -69,6 +84,7 @@ function SignUpComponent() {
                 value={password}
                 onChange={handlePasswordChange}
               />
+              <p className="error-text">{passwordError}</p>
             </div>
             <div className="signup-cancel-container">
               <Button 

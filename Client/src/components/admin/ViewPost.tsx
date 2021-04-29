@@ -18,7 +18,6 @@ function ViewPost() {
   const [titleError, setTitleError] = useState("");
   const [contentError, setContentError] = useState("");
 
-
   useEffect(() => {
     fetchPosts();
   }, [setPosts]);
@@ -43,6 +42,7 @@ function ViewPost() {
     try {
       const res = await fetch(`/api/post/${post._id}`, { method: "DELETE" });
       filterPosts(res);
+      alert('Post deleted')
     } catch (error) {
       console.error(error);
     }
@@ -119,6 +119,7 @@ function ViewPost() {
 
     fetch("/api/admin/post", options)
       .then((response) => {
+        alert('Post created!')
         return response.text();
       })
       .then((text) => {
@@ -146,7 +147,7 @@ function ViewPost() {
               value={title}
               onChange={handleTitleChange}
             />
-            <p>{titleError}</p>
+            <p className="error-text">{titleError}</p>
             <TextField
               className="content-input"
               label="Message"
@@ -156,7 +157,7 @@ function ViewPost() {
               value={content}
               onChange={handleContentChange}
             />
-            <p>{contentError}</p>
+            <p className="error-text">{contentError}</p>
             <Button type="submit" variant="outlined" onClick={handleClick}>
               Post
             </Button>
