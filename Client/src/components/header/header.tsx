@@ -7,32 +7,10 @@ function Header() {
   const getAuthContext = useAuthContext();
   const [auth, setAuth] = useState<boolean>(false)
   const history = useHistory()
-  console.log(auth)
 
   useEffect(() => {
     setAuth(getAuthContext.auth)
   },[getAuthContext.auth, setAuth])
-
-  // useEffect(() => {
-   
-
-  //   fetch('api/user/auth', { method: 'GET' })
-  //   .then(function (res) {
-  //     if (res.status === 200) {
-  //       setAuth(true)
-  //       // getAuthContext.getAuth(res.ok)
-  //     } else {
-  //       setAuth(false)
-  //     }
-  //   })
-  //   .catch(function (err) {
-  //     console.log(err)
-  //   })
-  // }, [getAuthContext, getAuthContext.auth, setAuth])
-
-  // if (auth === undefined) {
-  //   return null
-  // }
   
   const handleClick = (e:any) => {
     e.preventDefault()
@@ -42,10 +20,8 @@ function Header() {
     
     fetch('/api/user/logout', { method: 'GET' })
       .then((response) => {
-        console.log(response)
         if (response.ok) {        
-          
-                   
+          alert('You are now logged out!')      
         }
       })
       .catch((err) => {
