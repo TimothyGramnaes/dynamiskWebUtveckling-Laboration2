@@ -7,11 +7,16 @@ interface Posts {
   content: string;
   _id: number;
 }
-
+type postItem = {
+  title: string;
+  content: string;
+  id: number;
+};
 function ViewPost() {
   const [posts, setPosts] = useState<Posts[]>([]);
-  //   const [title, setTitle] = useState("");
-  //   const [content, setContent] = useState("");
+  let [editTitle, setEditTitle] = useState("");
+  let [editContent, setEditContent] = useState("");
+  let [editId, setEditId] = useState();
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -21,13 +26,14 @@ function ViewPost() {
     fetchPosts();
   }, [setPosts]); // setPosts
 
+  ///// hämtar poster ////////
   const fetchPosts = async () => {
     await fetch("/api/admin/post", { method: "GET" })
       .then(function (res) {
         if (res.status === 400) {
           return;
         }
-        // console.log(res)
+
         return res.json();
       })
       .then(function (data) {
@@ -40,6 +46,7 @@ function ViewPost() {
       });
   };
 
+  ///// hanterar delete posts //////
   const deletePost = async (post: any) => {
     // console.log("hejpa");
     try {
@@ -49,9 +56,6 @@ function ViewPost() {
     } catch (error) {
       console.error(error);
     }
-
-    //  await fetch.deletePost
-    // setPosts(posts - post)
   };
 
   function filterPosts(data: any) {
@@ -61,28 +65,50 @@ function ViewPost() {
         return item._id !== data._id;
       }),
     ];
-    console.log(posts);
     setPosts([...newPosts]);
     fetchPosts();
   }
-  ///// stänger/öppnar editform samt sätter id i ett state //////
 
-  //   let [editPost, setEditPost] = useState([]);
+  ///// hanterar edit //////
   function handleEditForm(post: any) {
     if (!isOpen) {
       setIsOpen(true);
     } else {
       setIsOpen(false);
     }
-    const newPost = {
-      title: post.title,
-      content: post.content,
-      id: post._id,
-    };
-    // setEditPost([...newPost]);
+    setEditTitle(post.title);
+    setEditContent(post.content);
+    setEditId(post._id);
   }
+  const handleEditTitle = (e: any) => {
+    setEditTitle(e.target.value);
+  };
+  const handleEditContent = (e: any) => {
+    setEditContent(e.target.value);
+  };
 
-  ///// gör edit requesten /////////
+  const handelEditSubmit = async (e: any) => {
+    e.preventDefault();
+    const editFormData = { title: editTitle, content: editContent };
+    const editedPost = await makeEditRequest(
+      `/api/admin/post/${editId}`,
+      "put",
+      editFormData
+    );
+    fetchPosts();
+    setIsOpen(false);
+  };
+
+  async function makeEditRequest(url: string, method: string, body: any) {
+    const res = await fetch(url, {
+      method: method,
+      body: JSON.stringify(body),
+      headers: { "Content-Type": "application/json" },
+    });
+    const result = await res.json();
+    console.log(body);
+    return result;
+  }
 
   const postsList = posts.map((p) => (
     <div className="your-posts-container" key={p._id}>
@@ -98,7 +124,7 @@ function ViewPost() {
     </div>
   ));
 
-  // create post koden ////
+  ///// Hanterar skapa poster  ////
   function clearIput() {
     setTitle("");
     setContent("");
@@ -139,7 +165,6 @@ function ViewPost() {
     clearIput();
   };
 
-  // create post koden /////
   if (!isOpen) {
     return (
       <div>
@@ -178,14 +203,62 @@ function ViewPost() {
     );
   } else {
     return (
-      <form method="put">
-        <h3>Ändra produkt</h3>
+      <div className="your-posts-container">
+        <div className="post-container">
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+            }}
+          >
+            <h3>Edit Post</h3>
+          </div>
+          <form
+            style={{
+              flexDirection: "column",
+              display: "flex",
+            }}
+            method="PUT"
+          >
+            <TextField
+              style={{ marginTop: "1rem" }}
+              label="Title"
+              type="text"
+              name="title"
+              id="title"
+              value={editTitle}
+              onChange={handleEditTitle}
+            />
 
-        <input type="text" name="title" id="title" />
-        <input type="text" name="content" id="content" />
-        <button>SEND</button>
-        <button onClick={handleEditForm}>CLOSE</button>
-      </form>
+            <TextField
+              style={{ marginTop: "1rem" }}
+              label="Content"
+              type="text"
+              name="content"
+              id="content"
+              value={editContent}
+              onChange={handleEditContent}
+            />
+            <Button
+              style={{ marginTop: "1rem" }}
+              color="secondary"
+              variant="contained"
+              type="submit"
+              onClick={handelEditSubmit}
+            >
+              EDIT
+            </Button>
+            <Button
+              style={{ marginTop: "1rem" }}
+              variant="outlined"
+              onClick={handleEditForm}
+            >
+              CLOSE
+            </Button>
+          </form>
+        </div>
+      </div>
     );
   }
 }
