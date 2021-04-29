@@ -1,20 +1,15 @@
 const express = require("express");
-// const mongoose = require("express");
 const UserModel = require("../models/user.model");
 const bcrypt = require('bcrypt');
 const router = express.Router();
 const jwt = require('jsonwebtoken')
-const cookie = require('cookie-parser')
-
-const userController = require('../controllers/user')
 
 router.post('/api/user/register', async (req, res) => {
-  console.log(req.body)
   const { email, password } = req.body;
   const emailExist = await UserModel.exists({ email: email })
 
   if (emailExist) {
-    return res.status(400).json("Email already exists");
+    res.status(400).json("Email already exists");
   }
   const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -25,11 +20,10 @@ router.post('/api/user/register', async (req, res) => {
 
     try {
         const user = await UserModel.create(Newuser)
-        return res.status(201).json(user)
+        res.status(201).json('User has been logged in')
     } catch (err) {
-        return res.json({ message: err })
+        res.status(400).json({ message: err })
     }
-
 })
 
 router.post('/api/user/login', async (req, res) => {
@@ -37,57 +31,61 @@ router.post('/api/user/login', async (req, res) => {
   const maxAge = 1 * 24 * 60 * 60
 
   const user = await UserModel.exists({ email: email })
-  console.log('woot')
+
   const createToken = (id) => {
     return jwt.sign(id, 'magic secret')
   }
 
   if (!user) {
-    // om ingen användare finns returnerar vi ett error
     return res.status(404).json("Wrong username not found");
   }
 
   try {
     const token = createToken(email)
     res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 })
-    res.status(200).json(user)
+    res.status(200).json('User is logged in')
   } catch (error) {
-    console.log(error)
+    res.status(400).json(error)
   }
 
 })
 
 router.get('/api/user/auth', async (req, res) => {
+  const auth = await req.cookies.jwt  
+  if (!auth) {
+    res.status(401)
+  } else {
+    res.status(200).json('User is authenticated')
+  }
+})
+
+
+router.get("/api/user", async (req, res) => {
+  const docs = await UserModel.find({});
+  res.status(200).json(docs);
+});
+
+
+router.get('/api/user/logout', async (req, res) => {
   const auth = await req.cookies.jwt
   
   if (!auth) {
     res.status(401)
   } else {
-    res.status(200).json(auth)
-  }
+    res.cookie('jwt', '', { maxAge: 1 })
+    res.status(200).json('User is logged out!')
+  } 
 })
-
-router.get("/api/user", async (req, res) => {
-  // console.log(req.cookieSession)
-  const docs = await UserModel.find({});
-  res.status(200).json(docs);
-});
-
-router.get('/api/user/logout', (req, res) => {
-  res.cookie('jwt', '', { maxAge: 1 })
-  res.redirect('/')
-})
-
 
 // Delete one item with ID
 router.delete('/api/user/:id', async (req, res) => {
   const doc = await UserModel.findById(req.params.id);
   UserModel.deleteOne(doc, (error) => {
     if (error) {
-      console.error(error)
+      res.status(400).json(error)
     } else return
   })
-  console.log(doc)
+ res.status(200).json('User has been deleted')
 })
 
 module.exports = router;
