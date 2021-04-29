@@ -2,6 +2,7 @@ import { Button, TextField } from "@material-ui/core";
 import { useState, useEffect } from "react";
 import "./createPost.css";
 import "./posts.css";
+
 interface Posts {
   title: string;
   content: string;
@@ -9,17 +10,15 @@ interface Posts {
 }
 
 function ViewPost() {
+  
   const [posts, setPosts] = useState<Posts[]>([]);
-  //   const [title, setTitle] = useState("");
-  //   const [content, setContent] = useState("");
-
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     fetchPosts();
-  }, [setPosts]); // setPosts
+  }, [setPosts]);
 
   const fetchPosts = async () => {
     await fetch("/api/admin/post", { method: "GET" })
@@ -27,12 +26,10 @@ function ViewPost() {
         if (res.status === 400) {
           return;
         }
-        // console.log(res)
         return res.json();
       })
       .then(function (data) {
         console.log([...data]);
-
         setPosts(data);
       })
       .catch(function (err) {
@@ -41,45 +38,31 @@ function ViewPost() {
   };
 
   const deletePost = async (post: any) => {
-    // console.log("hejpa");
     try {
       const res = await fetch(`/api/post/${post._id}`, { method: "DELETE" });
-      //console.log(res);
       filterPosts(res);
     } catch (error) {
       console.error(error);
     }
-
-    //  await fetch.deletePost
-    // setPosts(posts - post)
   };
 
   function filterPosts(data: any) {
-    console.log("posts");
     let newPosts = [
       ...posts.filter((item: any) => {
         return item._id !== data._id;
       }),
     ];
-    console.log(posts);
     setPosts([...newPosts]);
     fetchPosts();
   }
   ///// stänger/öppnar editform samt sätter id i ett state //////
 
-  //   let [editPost, setEditPost] = useState([]);
   function handleEditForm(post: any) {
     if (!isOpen) {
       setIsOpen(true);
     } else {
       setIsOpen(false);
     }
-    const newPost = {
-      title: post.title,
-      content: post.content,
-      id: post._id,
-    };
-    // setEditPost([...newPost]);
   }
 
   ///// gör edit requesten /////////
@@ -129,13 +112,11 @@ function ViewPost() {
         return response.text();
       })
       .then((text) => {
-        console.log(text);
         fetchPosts();
       })
       .catch((error) => {
         console.log(error);
       });
-    console.log(e);
     clearIput();
   };
 
@@ -171,7 +152,6 @@ function ViewPost() {
         </div>
         <div className="view-container">
           <h3>Your Posts</h3>
-
           {postsList}
         </div>
       </div>
@@ -180,7 +160,6 @@ function ViewPost() {
     return (
       <form method="put">
         <h3>Ändra produkt</h3>
-
         <input type="text" name="title" id="title" />
         <input type="text" name="content" id="content" />
         <button>SEND</button>
