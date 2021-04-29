@@ -1,8 +1,8 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import illustration from '../../images/Hero-Illustration.svg';
-import LandingPage from '../LandingPage/LandingPage';
-import './hero.css';
+import React from "react";
+import { Link } from "react-router-dom";
+import illustration from "../../images/Hero-Illustration.svg";
+import LandingPage from "../LandingPage/LandingPage";
+import "./hero.css";
 
 function Hero() {
   return (
@@ -19,14 +19,12 @@ function Hero() {
           </Link>
         </div> */}
       </div>
-      <img className="hero-img" src={illustration} alt="Illustration"/>
+      {/* <img className="hero-img" src={illustration} alt="Illustration" /> */}
       <div className="posts">
-      <LandingPage />
+        <LandingPage />
+      </div>
     </div>
-      
-    </div>
-    
-  )
+  );
 }
 
-export default Hero
+export default Hero;
