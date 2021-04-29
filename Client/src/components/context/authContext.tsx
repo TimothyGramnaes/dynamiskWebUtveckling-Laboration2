@@ -15,9 +15,10 @@ export const AuthProvider: FunctionComponent = ({ children }) => {
 
    
     const getAuth = (auth:boolean) => {
-        // useProductContext(id)
+        
         setAuth(auth) 
-        // setViewProduct(getProductView)        
+        console.log('kör getAuth funktionen')
+        
     }
 
     useEffect(() => {
@@ -28,18 +29,18 @@ export const AuthProvider: FunctionComponent = ({ children }) => {
         .then(function (res){  
             console.log(res)         
                 setAuth(res.ok) 
-                // getAuthContext.getAuth(res.ok)   
+                // getAuth(res.ok)   
                            
         })
         .catch(function (err) {
             console.log(err)
         })
-    }, [setAuth, auth])
+    }, [setAuth])
 
 
-    if (auth === undefined) {
-        return null;
-    }
+    // if (auth === undefined) {
+    //     return null;
+    // }
 
 
     return (
