@@ -32,7 +32,7 @@ function SignUpComponent() {
         return
       }
       if (!email.includes('@')) {
-        setEmailError('That is not a correct email address, try again')
+        setEmailError('That is not a valid email address, try again')
         return
       }
       if (password.length < 6) {

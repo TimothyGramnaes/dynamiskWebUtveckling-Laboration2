@@ -66,7 +66,7 @@ function LoginComponent() {
                 style={{ margin: "1rem 0" }}
                 required
                 id="email"
-                label="Username"
+                label="Email"
                 defaultValue="username"
                 value={email}
                 onChange={handleUserChange}
