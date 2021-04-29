@@ -66,12 +66,20 @@ function ViewPost() {
     fetchPosts();
   }
   ///// stänger/öppnar editform samt sätter id i ett state //////
-  function handleEditForm() {
+
+  //   let [editPost, setEditPost] = useState([]);
+  function handleEditForm(post: any) {
     if (!isOpen) {
       setIsOpen(true);
     } else {
       setIsOpen(false);
     }
+    const newPost = {
+      title: post.title,
+      content: post.content,
+      id: post._id,
+    };
+    // setEditPost([...newPost]);
   }
 
   ///// gör edit requesten /////////
@@ -83,7 +91,7 @@ function ViewPost() {
         <p>{p.content}</p>
         <div className="breaker"></div>
         <div className="btn-container">
-          <button onClick={handleEditForm}>Edit</button>
+          <button onClick={() => handleEditForm(p)}>Edit</button>
           <button onClick={() => deletePost(p)}>Delete</button>
         </div>
       </div>
@@ -172,6 +180,7 @@ function ViewPost() {
     return (
       <form method="put">
         <h3>Ändra produkt</h3>
+
         <input type="text" name="title" id="title" />
         <input type="text" name="content" id="content" />
         <button>SEND</button>
