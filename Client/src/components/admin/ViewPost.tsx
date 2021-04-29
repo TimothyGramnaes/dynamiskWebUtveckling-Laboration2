@@ -1,7 +1,7 @@
 import { Button, TextField } from "@material-ui/core";
 import { useState, useEffect } from "react";
-import './createPost.css'
-
+import "./createPost.css";
+import "./posts.css";
 interface Posts {
   title: string;
   content: string;
@@ -66,26 +66,38 @@ function ViewPost() {
     fetchPosts();
   }
   ///// stänger/öppnar editform samt sätter id i ett state //////
-  function handleEditForm() {
+
+  //   let [editPost, setEditPost] = useState([]);
+  function handleEditForm(post: any) {
     if (!isOpen) {
       setIsOpen(true);
     } else {
       setIsOpen(false);
     }
+    const newPost = {
+      title: post.title,
+      content: post.content,
+      id: post._id,
+    };
+    // setEditPost([...newPost]);
   }
 
   ///// gör edit requesten /////////
 
   const postsList = posts.map((p) => (
-    <div key={p._id}>
-      <h4>{p.title}</h4>
-      <p>{p.content}</p>
-      <div className="btn-container">
-        <button onClick={() => deletePost(p)}>Delete</button>
-        <button onClick={handleEditForm}>Edit</button>
+    <div className="your-posts-container" key={p._id}>
+      <div className="post-container">
+        <h4>{p.title}</h4>
+        <p>{p.content}</p>
+        <div className="breaker"></div>
+        <div className="btn-container">
+          <button onClick={() => handleEditForm(p)}>Edit</button>
+          <button onClick={() => deletePost(p)}>Delete</button>
+        </div>
       </div>
     </div>
   ));
+
   // create post koden ////
   function clearIput() {
     setTitle("");
@@ -139,7 +151,6 @@ function ViewPost() {
               className="title-input"
               label="Title"
               id="formTitle"
-              
               rows={10}
               value={title}
               onChange={handleTitleChange}
@@ -158,7 +169,7 @@ function ViewPost() {
             </Button>
           </form>
         </div>
-        <div className="viewlist">
+        <div className="view-container">
           <h3>Your Posts</h3>
 
           {postsList}
@@ -169,6 +180,7 @@ function ViewPost() {
     return (
       <form method="put">
         <h3>Ändra produkt</h3>
+
         <input type="text" name="title" id="title" />
         <input type="text" name="content" id="content" />
         <button>SEND</button>
