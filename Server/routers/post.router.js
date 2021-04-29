@@ -1,25 +1,16 @@
-const { response } = require("express");
 const express = require("express");
-// const mongoose = require("express");
 const PostModel = require("../models/post.model");
 
 const router = express.Router();
 
 router.get("/api/post", async (req, res) => {
   const docs = await PostModel.find({});
-
   res.status(200).json(docs);
 });
 
-// Get user specific posts
-// router.get("/api/post", async (req, res) => {
-//   const docs = await PostModel.find().populate("userId");
-//   res.status(200).json(docs);
-// });
 router.get("/api/admin/post", async (req, res) => {
 
   const auth = req.cookies.jwt
-  console.log(auth)
 
   const admin = false // ModelPost.user.Id == trure || false
 
@@ -60,7 +51,6 @@ router.put("/api/admin/post/:id", (req, res) => {
       });
     }
   );
-  // console.log(post);
 });
 
 // Delete one item with ID
@@ -73,7 +63,6 @@ router.delete("/api/post/:id", async (req, res) => {
       res.status(201).json(doc)
     }
   });
-  console.log(doc);
 });
 
 module.exports = router;
