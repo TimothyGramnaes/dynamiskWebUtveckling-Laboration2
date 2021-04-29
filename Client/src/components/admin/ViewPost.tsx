@@ -38,9 +38,6 @@ function ViewPost() {
         fetchPosts()
     })
     
-    
-    // console.log(posts)
-    
 
     const postsList = posts.map((p) => (
         

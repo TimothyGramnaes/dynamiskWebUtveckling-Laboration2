@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react';
-import './LandingPage.css'
 import { Grid } from '@material-ui/core';
 import { useState } from 'react';
 import { CSSProperties } from '@material-ui/styles';
 
 
+import './LandingPage.css'
 import ThumbDownIcon from '@material-ui/icons/ThumbDown';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import ChatBubbleIcon from '@material-ui/icons/ChatBubble';
@@ -68,32 +68,27 @@ function LandingPage() {
             <p>{p.content}</p>
             <div className="breaker"></div>
             <div className="actions">
-                            <div className="action">
-                                <p>LIKE</p>
-                                <ThumbUpIcon fontSize="small" className="icons" />
-                            </div>
-                            <div className="action">
-                                <p>DISLIKE</p>
-                                <ThumbDownIcon fontSize="small" className="icons" />
-                            </div>
-                            <div className="action">
-                                COMMENT
-                                <ChatBubbleIcon fontSize="small" className="icons" />
-                            </div>
-
-      </div>
-            
-        </div>
-        </div>
+              <div className="action">
+                <p>LIKE</p>
+                  <ThumbUpIcon fontSize="small" className="icons" />
+                  </div>
+                    <div className="action">
+                   <p>DISLIKE</p>
+                     <ThumbDownIcon fontSize="small" className="icons" />
+                  </div>
+                <div className="action">
+                 COMMENT
+             <ChatBubbleIcon fontSize="small" className="icons" />
+          </div>
+        </div>    
+       </div>
+    </div>
     ))
     return(
         <Grid container className="layoutMainContainer">
             <Grid className="displayer" container>
             {postsList}
-                
-
             </Grid>
-       
         </Grid>
     )
 }
