@@ -8,6 +8,7 @@ import { useAuthContext } from "../context/authContext"
 function AuthUser({...rest}) {   
     const getAuthContext = useAuthContext();
     const [auth, setAuth] = useState<boolean>(getAuthContext.auth)
+    console.log(auth)
     
 
     useEffect(() => {
