@@ -15,9 +15,9 @@ export const AuthProvider: FunctionComponent = ({ children }) => {
 
    
     const getAuth = (auth:boolean) => {
-        // useProductContext(id)
+        
         setAuth(auth) 
-        // setViewProduct(getProductView)        
+        
     }
 
     useEffect(() => {
@@ -27,8 +27,8 @@ export const AuthProvider: FunctionComponent = ({ children }) => {
         fetch('/api/user/auth', options)
         .then(function (res){  
             console.log(res)         
-                setAuth(res.ok) 
-                // getAuthContext.getAuth(res.ok)   
+                // setAuth(res.ok) 
+                getAuth(res.ok)   
                            
         })
         .catch(function (err) {
@@ -37,9 +37,9 @@ export const AuthProvider: FunctionComponent = ({ children }) => {
     }, [setAuth, auth])
 
 
-    if (auth === undefined) {
-        return null;
-    }
+    // if (auth === undefined) {
+    //     return null;
+    // }
 
 
     return (

@@ -5,15 +5,22 @@ import { useAuthContext } from "../context/authContext"
 
 function Header() {
   const getAuthContext = useAuthContext();
-  const [auth, setAuth] = useState<boolean>(getAuthContext.auth)
+  const [auth, setAuth] = useState<boolean>(false)
   const history = useHistory()
+  console.log(auth)
 
   useEffect(() => {
-    
+    setAuth(getAuthContext.auth)
+  },[getAuthContext.auth, setAuth])
+
+  useEffect(() => {
+   
+
     fetch('api/user/auth', { method: 'GET' })
     .then(function (res) {
       if (res.status === 200) {
         setAuth(true)
+        // getAuthContext.getAuth(res.ok)
       } else {
         setAuth(false)
       }
@@ -21,7 +28,7 @@ function Header() {
     .catch(function (err) {
       console.log(err)
     })
-  }, [getAuthContext.auth, setAuth])
+  }, [getAuthContext, getAuthContext.auth, setAuth])
 
   // if (auth === undefined) {
   //   return null
@@ -36,7 +43,7 @@ function Header() {
         console.log(response)
         if (response.ok) {
           history.push('/')
-          
+                   
         }
       })
       .catch((err) => {

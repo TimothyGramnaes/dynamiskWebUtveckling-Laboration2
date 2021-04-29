@@ -22,7 +22,7 @@ function ViewPost() {
   }, [setPosts]); // setPosts
 
   const fetchPosts = async () => {
-    await fetch("/api/post", { method: "GET" })
+    await fetch("/api/admin/post", { method: "GET" })
       .then(function (res) {
         if (res.status === 400) {
           return;
