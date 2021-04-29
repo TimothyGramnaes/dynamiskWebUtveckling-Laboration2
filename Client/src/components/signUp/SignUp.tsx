@@ -31,6 +31,10 @@ function SignUpComponent() {
         setEmailError('Email is too short')
         return
       }
+      if (!email.includes('@')) {
+        setEmailError('That is not a correct email address, try again')
+        return
+      }
       if (password.length < 6) {
         setPasswordError('Your password must contain at least 6 characters')
         return
@@ -68,7 +72,7 @@ function SignUpComponent() {
                 style={{ margin: "1rem" }}
                 required
                 id="email"
-                label="Username"
+                label="Email"
                 defaultValue="username"
                 value={email}
                 onChange={handleUserChange}
