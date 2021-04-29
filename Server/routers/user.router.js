@@ -30,25 +30,26 @@ router.post('/api/user/login', async (req, res) => {
   const { email, password } = req.body;
   const maxAge = 1 * 24 * 60 * 60
 
-  const user = await UserModel.exists({ email: email })
-
   const createToken = (id) => {
     return jwt.sign(id, 'magic secret')
-  }
-
-  if (!user) {
-    return res.status(404).json("Wrong username not found");
-  }
+  }  
 
   try {
-    const token = createToken(email)
+    const user = await UserModel.login(email, password)
+    console.log(user)
+    
+    createToken(email)
     res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 })
+      
     res.status(200).json('User is logged in')
+        
   } catch (error) {
+    console.log(error)
     res.status(400).json(error)
   }
-
 })
+
+  
 
 router.get('/api/user/auth', async (req, res) => {
   const auth = await req.cookies.jwt  
