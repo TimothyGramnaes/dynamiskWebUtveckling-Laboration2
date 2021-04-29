@@ -38,7 +38,7 @@ router.post('/api/user/login', async (req, res) => {
     const user = await UserModel.login(email, password)
     console.log(user)
     
-    createToken(email)
+    const token = createToken(email)
     res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 })
       
     res.status(200).json('User is logged in')
@@ -49,8 +49,6 @@ router.post('/api/user/login', async (req, res) => {
   }
 })
 
-  
-
 router.get('/api/user/auth', async (req, res) => {
   const auth = await req.cookies.jwt  
   if (!auth) {
@@ -60,12 +58,10 @@ router.get('/api/user/auth', async (req, res) => {
   }
 })
 
-
 router.get("/api/user", async (req, res) => {
   const docs = await UserModel.find({});
   res.status(200).json(docs);
 });
-
 
 router.get('/api/user/logout', async (req, res) => {
   const auth = await req.cookies.jwt
