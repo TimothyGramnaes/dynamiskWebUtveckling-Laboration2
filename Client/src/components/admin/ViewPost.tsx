@@ -17,6 +17,10 @@ function ViewPost() {
   const [isOpen, setIsOpen] = useState(false);
   const [titleError, setTitleError] = useState("");
   const [contentError, setContentError] = useState("");
+  const [changePost, setChangePost] = useState("")
+  const [changeTitle, setChangeTitle] = useState("");
+  const [changeContent, setChangeContent] = useState("");
+  
 
   useEffect(() => {
     fetchPosts();
@@ -60,6 +64,8 @@ function ViewPost() {
   ///// stänger/öppnar editform samt sätter id i ett state //////
 
   function handleEditForm(post: any) {
+    console.log(post)
+    setChangePost(post)
     if (!isOpen) {
       setIsOpen(true);
     } else {
@@ -76,7 +82,7 @@ function ViewPost() {
         <p>{p.content}</p>
         <div className="breaker"></div>
         <div className="btn-container">
-          <button onClick={() => handleEditForm(p)}>Edit</button>
+          <button onClick={() => handleEditForm(p._id)}>Edit</button>
           <button onClick={() => deletePost(p)}>Delete</button>
         </div>
       </div>
@@ -94,6 +100,14 @@ function ViewPost() {
 
   const handleContentChange = (e: any) => {
     setContent(e.target.value);
+  };
+
+  const handleChangeTitle = (e: any) => {
+    setChangeTitle(e.target.value);
+  };
+
+  const handleChangeContent = (e: any) => {
+    setChangeContent(e.target.value);
   };
 
   const handleClick = (e: any) => {
@@ -130,6 +144,42 @@ function ViewPost() {
       });
     clearInput();
   };
+
+  const confirmChangePost = (e:any) => {
+    e.preventDefault();
+    console.log(changePost)
+
+    const formData = { changeTitle, changeContent };
+    if (changeTitle.length < 1) {
+      setTitleError('Title is too short')
+      return
+    }
+    if (changeContent.length < 1) {
+      setContentError('Post cannot be empty')
+      return
+    }
+
+    const options = {
+      method: "put",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    };
+
+    fetch(`/api/admin/post/${changePost}`, options)
+      .then((response) => {
+        alert('Put created!')
+        return response.text();
+      })
+      .then((text) => {
+        fetchPosts();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+  }
 
   // create post koden /////
   if (!isOpen) {
@@ -171,11 +221,29 @@ function ViewPost() {
     );
   } else {
     return (
-      <form method="put">
+      <form action="/api" method="put">
         <h3>Ändra produkt</h3>
-        <input type="text" name="title" id="title" />
-        <input type="text" name="content" id="content" />
-        <button>SEND</button>
+        <TextField
+              className="title-input"
+              label="Title"
+              id="formTitle"
+              rows={10}
+              value={changeTitle}
+              onChange={handleChangeTitle}
+            />
+            
+            <TextField
+              className="content-input"
+              label="Message"
+              id="formContent"
+              multiline
+              rows={10}
+              value={changeContent}
+              onChange={handleChangeContent}
+            />
+        <Button type="submit" variant="outlined" onClick={confirmChangePost}>
+              Send
+        </Button>
         <button onClick={handleEditForm}>CLOSE</button>
       </form>
     );
