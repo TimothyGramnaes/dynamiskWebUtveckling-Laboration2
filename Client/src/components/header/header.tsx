@@ -7,7 +7,6 @@ function Header() {
   const getAuthContext = useAuthContext();
   const [auth, setAuth] = useState<boolean>(false)
   const history = useHistory()
-  console.log(auth)
 
   useEffect(() => {
     setAuth(getAuthContext.auth)
@@ -21,9 +20,9 @@ function Header() {
     
     fetch('/api/user/logout', { method: 'GET' })
       .then((response) => {
-        console.log(response)
-        if (response.ok) {    
-        } return
+        if (response.ok) {        
+          alert('You are now logged out!')      
+        }
       })
       .catch((err) => {
         console.log(err)

@@ -1,6 +1,7 @@
 import { Button, TextField } from "@material-ui/core";
 import { useState, useEffect } from "react";
-import './createPost.css'
+import "./createPost.css";
+import "./posts.css";
 
 interface Posts {
   title: string;
@@ -9,17 +10,17 @@ interface Posts {
 }
 
 function ViewPost() {
+  
   const [posts, setPosts] = useState<Posts[]>([]);
-  //   const [title, setTitle] = useState("");
-  //   const [content, setContent] = useState("");
-
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  const [titleError, setTitleError] = useState("");
+  const [contentError, setContentError] = useState("");
 
   useEffect(() => {
     fetchPosts();
-  }, [setPosts]); // setPosts
+  }, [setPosts]);
 
   const fetchPosts = async () => {
     await fetch("/api/admin/post", { method: "GET" })
@@ -27,12 +28,9 @@ function ViewPost() {
         if (res.status === 400) {
           return;
         }
-        // console.log(res)
         return res.json();
       })
       .then(function (data) {
-        console.log([...data]);
-
         setPosts(data);
       })
       .catch(function (err) {
@@ -41,32 +39,27 @@ function ViewPost() {
   };
 
   const deletePost = async (post: any) => {
-    // console.log("hejpa");
     try {
       const res = await fetch(`/api/post/${post._id}`, { method: "DELETE" });
-      //console.log(res);
       filterPosts(res);
+      alert('Post deleted')
     } catch (error) {
       console.error(error);
     }
-
-    //  await fetch.deletePost
-    // setPosts(posts - post)
   };
 
   function filterPosts(data: any) {
-    console.log("posts");
     let newPosts = [
       ...posts.filter((item: any) => {
         return item._id !== data._id;
       }),
     ];
-    console.log(posts);
     setPosts([...newPosts]);
     fetchPosts();
   }
   ///// stänger/öppnar editform samt sätter id i ett state //////
-  function handleEditForm() {
+
+  function handleEditForm(post: any) {
     if (!isOpen) {
       setIsOpen(true);
     } else {
@@ -77,17 +70,21 @@ function ViewPost() {
   ///// gör edit requesten /////////
 
   const postsList = posts.map((p) => (
-    <div key={p._id}>
-      <h4>{p.title}</h4>
-      <p>{p.content}</p>
-      <div className="btn-container">
-        <button onClick={() => deletePost(p)}>Delete</button>
-        <button onClick={handleEditForm}>Edit</button>
+    <div className="your-posts-container" key={p._id}>
+      <div className="post-container">
+        <h4>{p.title}</h4>
+        <p>{p.content}</p>
+        <div className="breaker"></div>
+        <div className="btn-container">
+          <button onClick={() => handleEditForm(p)}>Edit</button>
+          <button onClick={() => deletePost(p)}>Delete</button>
+        </div>
       </div>
     </div>
   ));
+
   // create post koden ////
-  function clearIput() {
+  function clearInput() {
     setTitle("");
     setContent("");
   }
@@ -103,6 +100,14 @@ function ViewPost() {
     e.preventDefault();
 
     const formData = { title, content };
+    if (title.length < 1) {
+      setTitleError('Title is too short')
+      return
+    }
+    if (content.length < 1) {
+      setContentError('Post cannot be empty')
+      return
+    }
 
     const options = {
       method: "post",
@@ -114,17 +119,16 @@ function ViewPost() {
 
     fetch("/api/admin/post", options)
       .then((response) => {
+        alert('Post created!')
         return response.text();
       })
       .then((text) => {
-        console.log(text);
         fetchPosts();
       })
       .catch((error) => {
         console.log(error);
       });
-    console.log(e);
-    clearIput();
+    clearInput();
   };
 
   // create post koden /////
@@ -139,11 +143,11 @@ function ViewPost() {
               className="title-input"
               label="Title"
               id="formTitle"
-              
               rows={10}
               value={title}
               onChange={handleTitleChange}
             />
+            <p className="error-text">{titleError}</p>
             <TextField
               className="content-input"
               label="Message"
@@ -153,14 +157,14 @@ function ViewPost() {
               value={content}
               onChange={handleContentChange}
             />
+            <p className="error-text">{contentError}</p>
             <Button type="submit" variant="outlined" onClick={handleClick}>
               Post
             </Button>
           </form>
         </div>
-        <div className="viewlist">
+        <div className="view-container">
           <h3>Your Posts</h3>
-
           {postsList}
         </div>
       </div>
