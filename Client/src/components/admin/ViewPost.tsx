@@ -15,6 +15,9 @@ function ViewPost() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  const [titleError, setTitleError] = useState("");
+  const [contentError, setContentError] = useState("");
+
 
   useEffect(() => {
     fetchPosts();
@@ -29,7 +32,6 @@ function ViewPost() {
         return res.json();
       })
       .then(function (data) {
-        console.log([...data]);
         setPosts(data);
       })
       .catch(function (err) {
@@ -82,7 +84,7 @@ function ViewPost() {
   ));
 
   // create post koden ////
-  function clearIput() {
+  function clearInput() {
     setTitle("");
     setContent("");
   }
@@ -98,6 +100,14 @@ function ViewPost() {
     e.preventDefault();
 
     const formData = { title, content };
+    if (title.length < 1) {
+      setTitleError('Title is too short')
+      return
+    }
+    if (content.length < 1) {
+      setContentError('Post cannot be empty')
+      return
+    }
 
     const options = {
       method: "post",
@@ -117,7 +127,7 @@ function ViewPost() {
       .catch((error) => {
         console.log(error);
       });
-    clearIput();
+    clearInput();
   };
 
   // create post koden /////
@@ -136,6 +146,7 @@ function ViewPost() {
               value={title}
               onChange={handleTitleChange}
             />
+            <p>{titleError}</p>
             <TextField
               className="content-input"
               label="Message"
@@ -145,6 +156,7 @@ function ViewPost() {
               value={content}
               onChange={handleContentChange}
             />
+            <p>{contentError}</p>
             <Button type="submit" variant="outlined" onClick={handleClick}>
               Post
             </Button>
