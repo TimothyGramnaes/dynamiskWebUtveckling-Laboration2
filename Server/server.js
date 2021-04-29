@@ -5,12 +5,14 @@ const userRouter = require("./routers/user.router");
 const cookieSession = require("cookie-session");
 const cookieParser = require("cookie-parser");
 const bcrypt = require("bcrypt");
+const { checkUser } = require("./middleware/authMiddleware");
 
 const app = express();
 app.use(cookieParser());
 
 app.use(express.json());
 app.get("/", (req, res) => res.json("HÄÄÄÄÄÄÄÄÄÄJ!!!!"));
+app.get("*", checkUser);
 app.use(postRouter);
 app.use(userRouter);
 
@@ -34,7 +36,7 @@ app.use((err, req, res, next) => {
 async function run() {
   try {
     await mongoose.connect(
-      "mongodb+srv://oliver:test123@laboration-2.y0faq.mongodb.net/lab-2-db",
+      "mongodb+srv://timpa:slarvkorv@cluster0.ddegw.mongodb.net/saltfactory",
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,

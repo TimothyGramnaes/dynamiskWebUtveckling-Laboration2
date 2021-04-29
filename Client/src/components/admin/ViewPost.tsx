@@ -4,6 +4,7 @@ import "./createPost.css";
 import "./posts.css";
 
 interface Posts {
+  user: string;
   title: string;
   content: string;
   _id: number;
@@ -73,6 +74,7 @@ function ViewPost() {
     <div className="your-posts-container" key={p._id}>
       <div className="post-container">
         <h4>{p.title}</h4>
+        <h3>{p.user}</h3>
         <p>{p.content}</p>
         <div className="breaker"></div>
         <div className="btn-container">

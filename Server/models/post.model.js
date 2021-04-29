@@ -1,14 +1,16 @@
 const mongoose = require("mongoose");
+//const { checkUser } = require("./middleware/authMiddleware");
 
 const postSchema = new mongoose.Schema(
   {
-    userId: 'String',
+    //  user: checkUser.user,
+    userId: "String",
     title: {
       type: "String",
     },
     content: {
       type: "String",
-    }
+    },
   },
   {
     timestamps: true,

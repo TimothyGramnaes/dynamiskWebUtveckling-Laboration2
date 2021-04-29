@@ -1,5 +1,6 @@
 const express = require("express");
 const PostModel = require("../models/post.model");
+// const { checkUser } = require("./middleware/authMiddleware");
 
 const router = express.Router();
 
@@ -9,14 +10,14 @@ router.get("/api/post", async (req, res) => {
 });
 
 router.get("/api/admin/post", async (req, res) => {
+  const auth = req.cookies.jwt;
+  // console.log(checkUser);
 
-  const auth = req.cookies.jwt
-
-  const admin = false // ModelPost.user.Id == trure || false
+  const admin = false; // ModelPost.user.Id == trure || false
 
   if (!admin) {
     const docs = await PostModel.find({ userId: auth });
-    res.status(200).json(docs)
+    res.status(200).json(docs);
   } else if (admin) {
     const docs = await PostModel.find();
     res.status(200).json(docs);
@@ -32,12 +33,13 @@ router.get("/api/post/:id", async (req, res) => {
 });
 
 router.post("/api/admin/post", async (req, res) => {
-  const auth = req.cookies.jwt
+  const auth = req.cookies.jwt;
   const post = {
+    // user: checkUser,
     userId: auth,
     title: req.body.title,
     content: req.body.content,
-  }
+  };
   const doc = await PostModel.create(post);
   res.status(201).json(doc);
 });
@@ -58,9 +60,9 @@ router.delete("/api/post/:id", async (req, res) => {
   const doc = await PostModel.findById(req.params.id);
   PostModel.deleteOne(doc, (error) => {
     if (error) {
-      res.status(400).json(error)
+      res.status(400).json(error);
     } else {
-      res.status(201).json(doc)
+      res.status(201).json(doc);
     }
   });
 });
