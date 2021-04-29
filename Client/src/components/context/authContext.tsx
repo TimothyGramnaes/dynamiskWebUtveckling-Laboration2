@@ -17,6 +17,7 @@ export const AuthProvider: FunctionComponent = ({ children }) => {
     const getAuth = (auth:boolean) => {
         
         setAuth(auth) 
+        console.log('kör getAuth funktionen')
         
     }
 
@@ -27,14 +28,14 @@ export const AuthProvider: FunctionComponent = ({ children }) => {
         fetch('/api/user/auth', options)
         .then(function (res){  
             console.log(res)         
-                // setAuth(res.ok) 
-                getAuth(res.ok)   
+                setAuth(res.ok) 
+                // getAuth(res.ok)   
                            
         })
         .catch(function (err) {
             console.log(err)
         })
-    }, [setAuth, auth])
+    }, [setAuth])
 
 
     // if (auth === undefined) {
