@@ -49,10 +49,11 @@ function LoginComponent() {
             alert('You are now logged in')
             history.push('/admin')
           }
-          if(!response.ok) {
-            setError('Something went wrong. Try again')
-          }
           return response.text();
+        })
+        .then((data)=> {
+          const dataToDisplay = data.replaceAll('"', '')
+          setError(dataToDisplay)
         })
         .catch((error) => {
           console.log(error)
@@ -86,7 +87,7 @@ function LoginComponent() {
                 value={password}
                 onChange={handlePasswordChange}
               />
-              <p>{error}</p>
+              <p className="password-error">{error}</p>
             </div>
 
             <div className="login-cancel-container">
