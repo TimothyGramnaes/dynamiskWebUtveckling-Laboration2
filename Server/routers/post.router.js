@@ -40,16 +40,16 @@ router.post("/api/admin/post", async (req, res) => {
 });
 
 /// Ändrar en post
-router.put("/api/admin/post/:id", (req, res) => {
-  console.log(req.body)
-  console.log(req.params.id)
-  PostModel.findByIdAndUpdate({ _id: req.params.id }, req.body).then(
-    function () {
-      PostModel.findOne({ _id: req.params.id }).then(function (post) {
-        res.status(200).json(post);
-      });
-    }
-  );
+router.put("/api/admin/post/:id", async (req, res) => {
+  try {
+    await PostModel.findByIdAndUpdate({ _id: req.params.id }, req.body)
+    res.status(200).json({ message: "Post sucsessfully edited!" });
+
+  } catch (error) {
+    res.status(400).json({ message: "Something went wrong!", error: error });
+  }
+
+
 });
 
 /// Tar bort en post 
@@ -59,7 +59,7 @@ router.delete("/api/post/:id", async (req, res) => {
     if (error) {
       res.status(400).json(error)
     } else {
-      res.status(201).json(doc)
+      res.status(200).json({ message: "Post sucessfully deleted" })
     }
   });
 });

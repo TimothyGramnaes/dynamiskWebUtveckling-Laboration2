@@ -14,23 +14,23 @@ POST http://localhost:3001/api/admin/post
 Content-Type: application/json
 
 {
-    "title": "Test",
+    "title": "Nytt test",
     "content": "Testar att skapa en post"
 }
 
 ###
 
 /// Ändrar en post
-PUT http://localhost:3001/api/admin/post/608a678747668c942c284c0e
+PUT http://localhost:3001/api/admin/post/608be995ecada82acc7de972
 Content-Type: application/json
 
 {
    
-    "title": "Test",
-    "content": "Testar att ändra en post"
+    "title": "Nytt edit test",
+    "content": "Nu är posten ändrad"
 }
 
 ###
 
 /// Tar bort en post
-DELETE http://localhost:3001/api/post/id
+DELETE http://localhost:3001/api/post/608be995ecada82acc7de972
