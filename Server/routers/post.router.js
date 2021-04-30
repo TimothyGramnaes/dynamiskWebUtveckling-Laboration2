@@ -1,18 +1,19 @@
 const express = require("express");
 const PostModel = require("../models/post.model");
-
 const router = express.Router();
 
+/// Hämtar alla posts
 router.get("/api/post", async (req, res) => {
   const docs = await PostModel.find({});
   res.status(200).json(docs);
 });
 
+/// Hämtar alla poster från användaren
 router.get("/api/admin/post", async (req, res) => {
 
   const auth = req.cookies.jwt
 
-  const admin = false // ModelPost.user.Id == trure || false
+  const admin = false
 
   if (!admin) {
     const docs = await PostModel.find({ userId: auth });
@@ -25,12 +26,8 @@ router.get("/api/admin/post", async (req, res) => {
   }
 });
 
-// Get one item
-router.get("/api/post/:id", async (req, res) => {
-  const docs = await PostModel.findById(req.params.id);
-  res.status(200).json(docs);
-});
 
+/// Skapar en post
 router.post("/api/admin/post", async (req, res) => {
   const auth = req.cookies.jwt
   const post = {
@@ -42,7 +39,7 @@ router.post("/api/admin/post", async (req, res) => {
   res.status(201).json(doc);
 });
 
-// Change a post
+/// Ändrar en post
 router.put("/api/admin/post/:id", (req, res) => {
   console.log(req.body)
   console.log(req.params.id)
@@ -55,7 +52,7 @@ router.put("/api/admin/post/:id", (req, res) => {
   );
 });
 
-// Delete one item with ID
+/// Tar bort en post 
 router.delete("/api/post/:id", async (req, res) => {
   const doc = await PostModel.findById(req.params.id);
   PostModel.deleteOne(doc, (error) => {
