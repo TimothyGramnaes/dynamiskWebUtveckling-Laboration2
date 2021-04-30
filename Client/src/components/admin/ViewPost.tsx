@@ -2,16 +2,13 @@ import { Button, TextField } from "@material-ui/core";
 import { useState, useEffect } from "react";
 import "./createPost.css";
 import "./posts.css";
+
 interface Posts {
   title: string;
   content: string;
   _id: number;
 }
-type postItem = {
-  title: string;
-  content: string;
-  id: number;
-};
+
 function ViewPost() {
   const [posts, setPosts] = useState<Posts[]>([]);
   let [editTitle, setEditTitle] = useState("");
@@ -220,6 +217,7 @@ function ViewPost() {
               display: "flex",
             }}
             method="PUT"
+            className="inputField"
           >
             <TextField
               style={{ marginTop: "1rem" }}
@@ -240,20 +238,10 @@ function ViewPost() {
               value={editContent}
               onChange={handleEditContent}
             />
-            <Button
-              style={{ marginTop: "1rem" }}
-              color="secondary"
-              variant="contained"
-              type="submit"
-              onClick={handelEditSubmit}
-            >
+            <Button variant="outlined" type="submit" onClick={handelEditSubmit}>
               EDIT
             </Button>
-            <Button
-              style={{ marginTop: "1rem" }}
-              variant="outlined"
-              onClick={handleEditForm}
-            >
+            <Button variant="outlined" onClick={handleEditForm}>
               CLOSE
             </Button>
           </form>
