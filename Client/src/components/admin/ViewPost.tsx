@@ -88,6 +88,9 @@ function ViewPost() {
   function clearInput() {
     setTitle("");
     setContent("");
+    setTimeout(() => {
+      setSuccessText("")
+    }, 5000);
   }
   const handleTitleChange = (e: any) => {
     setTitle(e.target.value);
@@ -97,8 +100,12 @@ function ViewPost() {
     setContent(e.target.value);
   };
 
+
   const handleClick = (e: any) => {
     e.preventDefault();
+
+    setTitleError("")
+    setContentError("")
 
     const formData = { title, content };
     if (title.length < 1) {
