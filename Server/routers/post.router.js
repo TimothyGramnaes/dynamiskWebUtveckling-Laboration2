@@ -11,7 +11,6 @@ router.get("/api/post", async (req, res) => {
 
 router.get("/api/admin/post", async (req, res) => {
   const auth = req.cookies.jwt;
-  // console.log(checkUser);
 
   const admin = false; // ModelPost.user.Id == trure || false
 
