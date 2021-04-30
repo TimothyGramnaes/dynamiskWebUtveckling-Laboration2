@@ -1,6 +1,6 @@
 const express = require("express");
 const PostModel = require("../models/post.model");
-// const { checkUser } = require("./middleware/authMiddleware");
+const { checkUser } = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
@@ -32,8 +32,9 @@ router.get("/api/post/:id", async (req, res) => {
   res.status(200).json(docs);
 });
 
-router.post("/api/admin/post", async (req, res) => {
+router.post("/api/admin/post", checkUser, async (req, res) => {
   const auth = req.cookies.jwt;
+
   const post = {
     // user: checkUser,
     userId: auth,

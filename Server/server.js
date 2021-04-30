@@ -5,26 +5,26 @@ const userRouter = require("./routers/user.router");
 const cookieSession = require("cookie-session");
 const cookieParser = require("cookie-parser");
 const bcrypt = require("bcrypt");
-const { checkUser } = require("./middleware/authMiddleware");
+// const { checkUser } = require("./middleware/authMiddleware");
 
 const app = express();
 app.use(cookieParser());
 
 app.use(express.json());
 app.get("/", (req, res) => res.json("HÄÄÄÄÄÄÄÄÄÄJ!!!!"));
-app.get("*", checkUser);
+// app.get("*", checkUser);
 app.use(postRouter);
 app.use(userRouter);
 
-app.use(
-  cookieSession({
-    name: "session",
-    secret: "aVeryS3cr3tK3y",
-    secure: false,
-    maxAge: 1000 * 60,
-    httpOnly: true,
-  })
-);
+// app.use(
+//   cookieSession({
+//     name: "session",
+//     secret: "aVeryS3cr3tK3y",
+//     secure: false,
+//     maxAge: 1000 * 60,
+//     httpOnly: true,
+//   })
+// );
 
 //server.use('/posts', postsRoutes)
 

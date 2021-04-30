@@ -13,8 +13,10 @@ const checkUser = async (req, res, next) => {
         next();
       } else {
         console.log(decodedToken);
+        console.log("hej");
         let user = await UserModel.findById(decodedToken.id);
         res.locals.user = user;
+        console.log(user);
         next();
       }
     });
