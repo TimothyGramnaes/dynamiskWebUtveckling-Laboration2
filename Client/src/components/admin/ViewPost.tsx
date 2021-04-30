@@ -253,7 +253,7 @@ function ViewPost() {
               onChange={handleEditContent}
             />
             <Button variant="outlined" type="submit" onClick={handelEditSubmit}>
-              EDIT
+              SAVE
             </Button>
             <Button variant="outlined" onClick={handleEditForm}>
               CLOSE
