@@ -1,12 +1,8 @@
-GET http://localhost:3001/api/user
-
-###
-
 POST http://localhost:3001/api/user/register
 Content-Type: application/json
 
 {
-    "email": "fsdf@test.se",
+    "email": "nalle@test.se",
     "password": "test12"
 }
 
@@ -16,8 +12,8 @@ POST http://localhost:3001/api/user/login
 Content-Type: application/json
 
 {
-    "email": "bob@hey.com",
-    "password": "iheofoef"
+    "email": "nalle@test.se",
+    "password": "test12"
 }
 
 ###
@@ -27,21 +23,3 @@ GET http://localhost:3001/api/user/logout
 ###
 
 GET http://localhost:3001/api/user/auth
-
-###
-
-// För VG
-PUT http://localhost:3001/api/user/608163124e6aad6244ba7508
-Content-Type: application/json
-
-{
-    "authorKey": "1",
-    "author": "CiiD",
-    "title": "Rubrik",
-    "salt": "Massa Lorem"
-}
-
-###
-
-// VG
-DELETE http://localhost:3001/api/user/60816d3718d9ca0818fa418e

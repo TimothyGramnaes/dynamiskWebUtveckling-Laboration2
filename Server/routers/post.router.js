@@ -44,6 +44,8 @@ router.post("/api/admin/post", async (req, res) => {
 
 // Change a post
 router.put("/api/admin/post/:id", (req, res) => {
+  console.log(req.body)
+  console.log(req.params.id)
   PostModel.findByIdAndUpdate({ _id: req.params.id }, req.body).then(
     function () {
       PostModel.findOne({ _id: req.params.id }).then(function (post) {

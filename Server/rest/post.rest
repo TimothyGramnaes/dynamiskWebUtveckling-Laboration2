@@ -25,13 +25,13 @@ Content-Type: application/json
 ###
 
 // Ändra inlägg - SKA GÖRAS
-PUT http://localhost:3001/api/admin/post/6087fed805fcf11d9c37dad2
+PUT http://localhost:3001/api/admin/post/608a678747668c942c284c0e
 Content-Type: application/json
 
 {
     "userId": "CiiD",
-    "title": "Rubrik",
-    "content": "Massa Lorem"
+    "title": "Rubrik post test",
+    "content": "Massa Lorem om detta funkar"
 }
 
 ###
