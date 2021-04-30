@@ -4,6 +4,8 @@ const bcrypt = require('bcrypt');
 const router = express.Router();
 const jwt = require('jsonwebtoken')
 
+
+// Register a user, if the email already exist it returns a error
 router.post('/api/user/register', async (req, res) => {
   const { email, password } = req.body;
   const emailExist = await UserModel.exists({ email: email })
@@ -26,6 +28,9 @@ router.post('/api/user/register', async (req, res) => {
   }
 })
 
+// Login
+// Checkes the email and password if it is correct
+// Uses an login function from UserModel to check the user info
 router.post('/api/user/login', async (req, res) => {
   const { email, password } = req.body;
   const maxAge = 1 * 24 * 60 * 60
@@ -47,6 +52,7 @@ router.post('/api/user/login', async (req, res) => {
   }
 })
 
+// Checkes if the user is logged in or not and send it to the front
 router.get('/api/user/auth', async (req, res) => {
   const auth = await req.cookies.jwt  
   if (!auth) {
@@ -56,11 +62,8 @@ router.get('/api/user/auth', async (req, res) => {
   }
 })
 
-router.get("/api/user", async (req, res) => {
-  const docs = await UserModel.find({});
-  res.status(200).json(docs);
-});
-
+// Logout the user
+// Sets a empty cookie that expires after 1ms
 router.get('/api/user/logout', async (req, res) => {
   const auth = await req.cookies.jwt
   
@@ -70,17 +73,6 @@ router.get('/api/user/logout', async (req, res) => {
     res.cookie('jwt', '', { maxAge: 1 })
     res.status(200).json('User is logged out!')
   } 
-})
-
-// Delete one item with ID
-router.delete('/api/user/:id', async (req, res) => {
-  const doc = await UserModel.findById(req.params.id);
-  UserModel.deleteOne(doc, (error) => {
-    if (error) {
-      res.status(400).json(error)
-    } else return
-  })
- res.status(200).json('User has been deleted')
 })
 
 module.exports = router;

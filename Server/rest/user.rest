@@ -1,25 +1,29 @@
+// Create a user
 POST http://localhost:3001/api/user/register
 Content-Type: application/json
 
 {
-    "email": "nalle@test.se",
+    "email": "nae@test.se",
     "password": "test12"
 }
 
 ###
 
+// Login the user
 POST http://localhost:3001/api/user/login
 Content-Type: application/json
 
 {
-    "email": "nalle@test.se",
+    "email": "nae@test.se",
     "password": "test12"
 }
 
 ###
 
+// Logout the user
 GET http://localhost:3001/api/user/logout
 
 ###
 
+// Checks if the user is auth
 GET http://localhost:3001/api/user/auth
