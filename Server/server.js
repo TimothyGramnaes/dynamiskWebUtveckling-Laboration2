@@ -20,7 +20,7 @@ app.use((err, req, res, next) => {
 async function run() {
   try {
     await mongoose.connect(
-      "mongodb+srv://first-test-user:1000Tunland@cluster0.97bq1.mongodb.net/test",
+      "Klistra in din mongoDb server-länk här!",
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,
