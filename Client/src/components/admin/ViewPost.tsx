@@ -127,7 +127,6 @@ function ViewPost() {
 
     fetch("/api/admin/post", options)
       .then((response) => {
-        // alert('Post created!')
         setSuccessText('Post Created')
         return response.text();
       })
