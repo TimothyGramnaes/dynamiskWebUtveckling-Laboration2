@@ -31,11 +31,18 @@ header {
   background: black;
   border-color: black;
   color: white;
+  transition: 200ms ease-in-out;
 }
 
 .border-btn {
   background: transparent;
   border: 2px black solid;
+  transition: 300ms;
+}
+
+.border-btn:hover {
+  background: black;
+  color: white;
 }
 
 .admin-btn {

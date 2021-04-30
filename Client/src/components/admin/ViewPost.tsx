@@ -18,10 +18,12 @@ function ViewPost() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  const [titleError, setTitleError] = useState("");
+  const [contentError, setContentError] = useState("");
 
   useEffect(() => {
     fetchPosts();
-  }, [setPosts]); // setPosts
+  }, [setPosts]);
 
   ///// hämtar poster ////////
   const fetchPosts = async () => {
@@ -30,12 +32,9 @@ function ViewPost() {
         if (res.status === 400) {
           return;
         }
-
         return res.json();
       })
       .then(function (data) {
-        console.log([...data]);
-
         setPosts(data);
       })
       .catch(function (err) {
@@ -45,18 +44,16 @@ function ViewPost() {
 
   ///// hanterar delete posts //////
   const deletePost = async (post: any) => {
-    // console.log("hejpa");
     try {
       const res = await fetch(`/api/post/${post._id}`, { method: "DELETE" });
-      //console.log(res);
       filterPosts(res);
+      alert("Post deleted");
     } catch (error) {
       console.error(error);
     }
   };
 
   function filterPosts(data: any) {
-    console.log("posts");
     let newPosts = [
       ...posts.filter((item: any) => {
         return item._id !== data._id;
@@ -122,7 +119,7 @@ function ViewPost() {
   ));
 
   ///// Hanterar skapa poster  ////
-  function clearIput() {
+  function clearInput() {
     setTitle("");
     setContent("");
   }
@@ -138,6 +135,14 @@ function ViewPost() {
     e.preventDefault();
 
     const formData = { title, content };
+    if (title.length < 1) {
+      setTitleError("Title is too short");
+      return;
+    }
+    if (content.length < 1) {
+      setContentError("Post cannot be empty");
+      return;
+    }
 
     const options = {
       method: "post",
@@ -149,17 +154,16 @@ function ViewPost() {
 
     fetch("/api/admin/post", options)
       .then((response) => {
+        alert("Post created!");
         return response.text();
       })
       .then((text) => {
-        console.log(text);
         fetchPosts();
       })
       .catch((error) => {
         console.log(error);
       });
-    console.log(e);
-    clearIput();
+    clearInput();
   };
 
   if (!isOpen) {
@@ -177,6 +181,7 @@ function ViewPost() {
               value={title}
               onChange={handleTitleChange}
             />
+            <p className="error-text">{titleError}</p>
             <TextField
               className="content-input"
               label="Message"
@@ -186,6 +191,7 @@ function ViewPost() {
               value={content}
               onChange={handleContentChange}
             />
+            <p className="error-text">{contentError}</p>
             <Button type="submit" variant="outlined" onClick={handleClick}>
               Post
             </Button>
@@ -193,7 +199,6 @@ function ViewPost() {
         </div>
         <div className="view-container">
           <h3>Your Posts</h3>
-
           {postsList}
         </div>
       </div>
