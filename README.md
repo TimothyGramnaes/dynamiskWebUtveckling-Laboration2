@@ -22,7 +22,6 @@ Before starting up, install the necessary packages by running:
 8. Connect your IP address, then choose "Connect your application" and copy the string that resembles: mongodb+srv://<username>:<password>@clusterName.y0faq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
 9. Click on your cluster and go to the "collections" tab.
 10. Create a new database.
-11. Inside the database, create two new collections, "users" and "posts"
 12. To connect your database in the code via mongoose, go to line 37 in 'server.js' and replace the string (const dbURI) with your connection string from point 8
 13. Replace <username> with the username of the user you created, and do the same with <password>. Replace myFirstDataBase with the name of the database you created.
 
