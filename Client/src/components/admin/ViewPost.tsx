@@ -10,8 +10,11 @@ interface Posts {
 }
 
 function ViewPost() {
-  
   const [posts, setPosts] = useState<Posts[]>([]);
+  let [editTitle, setEditTitle] = useState("");
+  let [editContent, setEditContent] = useState("");
+  let [editId, setEditId] = useState();
+
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [isOpen, setIsOpen] = useState(false);
@@ -22,6 +25,7 @@ function ViewPost() {
     fetchPosts();
   }, [setPosts]);
 
+  ///// hämtar poster ////////
   const fetchPosts = async () => {
     await fetch("/api/admin/post", { method: "GET" })
       .then(function (res) {
@@ -38,11 +42,12 @@ function ViewPost() {
       });
   };
 
+  ///// hanterar delete posts //////
   const deletePost = async (post: any) => {
     try {
       const res = await fetch(`/api/post/${post._id}`, { method: "DELETE" });
       filterPosts(res);
-      alert('Post deleted')
+      alert("Post deleted");
     } catch (error) {
       console.error(error);
     }
@@ -57,17 +62,47 @@ function ViewPost() {
     setPosts([...newPosts]);
     fetchPosts();
   }
-  ///// stänger/öppnar editform samt sätter id i ett state //////
 
+  ///// hanterar edit //////
   function handleEditForm(post: any) {
     if (!isOpen) {
       setIsOpen(true);
     } else {
       setIsOpen(false);
     }
+    setEditTitle(post.title);
+    setEditContent(post.content);
+    setEditId(post._id);
   }
+  const handleEditTitle = (e: any) => {
+    setEditTitle(e.target.value);
+  };
+  const handleEditContent = (e: any) => {
+    setEditContent(e.target.value);
+  };
 
-  ///// gör edit requesten /////////
+  const handelEditSubmit = async (e: any) => {
+    e.preventDefault();
+    const editFormData = { title: editTitle, content: editContent };
+    const editedPost = await makeEditRequest(
+      `/api/admin/post/${editId}`,
+      "put",
+      editFormData
+    );
+    fetchPosts();
+    setIsOpen(false);
+  };
+
+  async function makeEditRequest(url: string, method: string, body: any) {
+    const res = await fetch(url, {
+      method: method,
+      body: JSON.stringify(body),
+      headers: { "Content-Type": "application/json" },
+    });
+    const result = await res.json();
+    console.log(body);
+    return result;
+  }
 
   const postsList = posts.map((p) => (
     <div className="your-posts-container" key={p._id}>
@@ -83,7 +118,7 @@ function ViewPost() {
     </div>
   ));
 
-  // create post koden ////
+  ///// Hanterar skapa poster  ////
   function clearInput() {
     setTitle("");
     setContent("");
@@ -101,12 +136,12 @@ function ViewPost() {
 
     const formData = { title, content };
     if (title.length < 1) {
-      setTitleError('Title is too short')
-      return
+      setTitleError("Title is too short");
+      return;
     }
     if (content.length < 1) {
-      setContentError('Post cannot be empty')
-      return
+      setContentError("Post cannot be empty");
+      return;
     }
 
     const options = {
@@ -119,7 +154,7 @@ function ViewPost() {
 
     fetch("/api/admin/post", options)
       .then((response) => {
-        alert('Post created!')
+        alert("Post created!");
         return response.text();
       })
       .then((text) => {
@@ -131,7 +166,6 @@ function ViewPost() {
     clearInput();
   };
 
-  // create post koden /////
   if (!isOpen) {
     return (
       <div>
@@ -171,13 +205,53 @@ function ViewPost() {
     );
   } else {
     return (
-      <form method="put">
-        <h3>Ändra produkt</h3>
-        <input type="text" name="title" id="title" />
-        <input type="text" name="content" id="content" />
-        <button>SEND</button>
-        <button onClick={handleEditForm}>CLOSE</button>
-      </form>
+      <div className="your-posts-container">
+        <div className="post-container">
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+            }}
+          >
+            <h3>Edit Post</h3>
+          </div>
+          <form
+            style={{
+              flexDirection: "column",
+              display: "flex",
+            }}
+            method="PUT"
+            className="inputField"
+          >
+            <TextField
+              style={{ marginTop: "1rem" }}
+              label="Title"
+              type="text"
+              name="title"
+              id="title"
+              value={editTitle}
+              onChange={handleEditTitle}
+            />
+
+            <TextField
+              style={{ marginTop: "1rem" }}
+              label="Content"
+              type="text"
+              name="content"
+              id="content"
+              value={editContent}
+              onChange={handleEditContent}
+            />
+            <Button variant="outlined" type="submit" onClick={handelEditSubmit}>
+              EDIT
+            </Button>
+            <Button variant="outlined" onClick={handleEditForm}>
+              CLOSE
+            </Button>
+          </form>
+        </div>
+      </div>
     );
   }
 }
