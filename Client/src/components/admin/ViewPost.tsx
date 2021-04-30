@@ -64,7 +64,6 @@ function ViewPost() {
   ///// stänger/öppnar editform samt sätter id i ett state //////
 
   function handleEditForm(post: any) {
-    console.log(post)
     setChangePost(post)
     if (!isOpen) {
       setIsOpen(true);
@@ -147,8 +146,7 @@ function ViewPost() {
 
   const confirmChangePost = (e:any) => {
     e.preventDefault();
-    console.log(changePost)
-
+   
     const formData = { changeTitle, changeContent };
     if (changeTitle.length < 1) {
       setTitleError('Title is too short')
@@ -244,7 +242,9 @@ function ViewPost() {
         <Button type="submit" variant="outlined" onClick={confirmChangePost}>
               Send
         </Button>
-        <button onClick={handleEditForm}>CLOSE</button>
+        <Button type="submit" variant="outlined" onClick={handleEditForm}>
+              Close
+        </Button>        
       </form>
     );
   }

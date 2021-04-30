@@ -44,13 +44,12 @@ router.post("/api/admin/post", async (req, res) => {
 
 // Change a post
 router.put("/api/admin/post/:id", (req, res) => {
-  console.log('ändra något?')
 
   const post = {
     title: req.body.changeTitle,
     content: req.body.changeContent
   }
-  console.log(post)
+  
   PostModel.findByIdAndUpdate({ _id: req.params.id }, post).then(
     function () {
       PostModel.findOne({ _id: req.params.id }).then(function (post) {
