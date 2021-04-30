@@ -1,6 +1,6 @@
 # SaltFactory
 
-Welcome to SaltFactory, a place to share your feelings and thoughts when you're feeling extra salty. The feed of posts will show up on your homepage. To create your own posts, the only thing you have to do is just create an account and log in! Your posts can easily be edited and deleted from Your Salt Feed.
+Welcome to SaltFactory, a place to anonymously share your thoughts and feelings when you're feeling extra salty. The feed of posts will show up on your homepage. To create your own posts, the only thing you have to do is just create an account and log in! Your posts can easily be edited and deleted from Your Salt Feed.
 
 ## Available Scripts
 
