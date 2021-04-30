@@ -8,22 +8,22 @@ router.post('/api/user/register', async (req, res) => {
   const { email, password } = req.body;
   const emailExist = await UserModel.exists({ email: email })
 
-  if (emailExist) {
-    res.status(400).json("Email already exists");
-  }
-  const hashedPassword = await bcrypt.hash(password, 10);
+  if (!emailExist) {
+    const hashedPassword = await bcrypt.hash(password, 10);
 
-  const Newuser = {
+    const Newuser = {
         email: email,
         password: hashedPassword
     }
-
     try {
         const user = await UserModel.create(Newuser)
-        res.status(201).json('User has been logged in')
+        res.status(201).json('User has been registered')
     } catch (err) {
         res.status(400).json({ message: err })
-    }
+    }    
+  } else {  
+    res.status(400).json("Email already exists");
+  }
 })
 
 router.post('/api/user/login', async (req, res) => {
@@ -36,15 +36,13 @@ router.post('/api/user/login', async (req, res) => {
 
   try {
     const user = await UserModel.login(email, password)
-    console.log(user)
-    
+        
     const token = createToken(email)
     res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 })
       
     res.status(200).json('User is logged in')
         
   } catch (error) {
-    console.log(error)
     res.status(400).json(error)
   }
 })
@@ -52,7 +50,7 @@ router.post('/api/user/login', async (req, res) => {
 router.get('/api/user/auth', async (req, res) => {
   const auth = await req.cookies.jwt  
   if (!auth) {
-    res.status(401)
+    res.status(401).json('No user is logged in')
   } else {
     res.status(200).json('User is authenticated')
   }
