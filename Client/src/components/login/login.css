@@ -10,6 +10,13 @@
   height: auto;
 }
 
+.password-error {
+  color: rgb(225, 60, 60);
+  margin: 1rem auto;
+  font-weight: 600;
+  text-align: center;
+}
+
 .login-title {
   font-size: 2.5rem;
   margin: 1.5rem auto 0 auto;
