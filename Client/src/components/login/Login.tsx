@@ -12,6 +12,7 @@ function LoginComponent() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [emailError, setEmailError] = useState("");
+  const [error, setError] = useState("");
 
   const handleUserChange = (e:any) => {
     setEmail(e.target.value)
@@ -48,6 +49,9 @@ function LoginComponent() {
             alert('You are now logged in')
             history.push('/admin')
           }
+          if(!response.ok) {
+            setError('Something went wrong. Try again')
+          }
           return response.text();
         })
         .catch((error) => {
@@ -82,6 +86,7 @@ function LoginComponent() {
                 value={password}
                 onChange={handlePasswordChange}
               />
+              <p>{error}</p>
             </div>
 
             <div className="login-cancel-container">

@@ -20,6 +20,7 @@ function ViewPost() {
   const [isOpen, setIsOpen] = useState(false);
   const [titleError, setTitleError] = useState("");
   const [contentError, setContentError] = useState("");
+  const [successText, setSuccessText] = useState("")
 
   useEffect(() => {
     fetchPosts();
@@ -122,6 +123,9 @@ function ViewPost() {
   function clearInput() {
     setTitle("");
     setContent("");
+    setTimeout(() => {
+      setSuccessText("")
+    }, 5000);
   }
   const handleTitleChange = (e: any) => {
     setTitle(e.target.value);
@@ -131,8 +135,12 @@ function ViewPost() {
     setContent(e.target.value);
   };
 
+
   const handleClick = (e: any) => {
     e.preventDefault();
+
+    setTitleError("")
+    setContentError("")
 
     const formData = { title, content };
     if (title.length < 1) {
@@ -154,7 +162,7 @@ function ViewPost() {
 
     fetch("/api/admin/post", options)
       .then((response) => {
-        alert("Post created!");
+        setSuccessText('Post Created')
         return response.text();
       })
       .then((text) => {
@@ -195,6 +203,7 @@ function ViewPost() {
             <Button type="submit" variant="outlined" onClick={handleClick}>
               Post
             </Button>
+            <p className="success-text">{successText}</p>
           </form>
         </div>
         <div className="view-container">
