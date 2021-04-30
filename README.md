@@ -1,8 +1,34 @@
-# Getting Started with Create React App
+# SaltFactory
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to SaltFactory, a place to share your feelings and thoughts when you're feeling extra salty. The feed of posts will show up on your homepage. To create your own posts, the only thing you have to do is just create an account and log in! Your posts can easily be edited and deleted from Your Salt Feed.
 
 ## Available Scripts
+
+Before starting up, install the necessary packages by running:
+
+### `npm install`
+
+## Connecting your local database
+
+#### If you don't have a MongoDB Cluster with a database in it:
+
+1. Log in to [MongoDB Cloud](https://account.mongodb.com/account/login)
+2. Create a new project
+3. Inside of the project, create a new cluster
+4. When the cluster has been created, create a new database
+5. In the left sidebar, click Database Access.
+6. Add a new user with a username and password
+7. In the left sidebar, click Clusters. In the Cluster overview, click Connect
+8. Connect your IP address, then choose "Connect your application" and copy the string that resembles: mongodb+srv://<username>:<password>@clusterName.y0faq.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+9. Click on your cluster and go to the "collections" tab.
+10. Create a new database.
+11. Inside the database, create two new collections, "users" and "posts"
+12. To connect your database in the code via mongoose, go to line 37 in 'server.js' and replace the string (const dbURI) with your connection string from point 8
+13. Replace <username> with the username of the user you created, and do the same with <password>. Replace myFirstDataBase with the name of the database you created.
+
+#### If you already have a MongoDB Cluster with a database in it, and a string to connect:
+
+Repeat points 11-12 from above.
 
 In the project directory, you can run:
 
@@ -10,37 +36,8 @@ In the project directory, you can run:
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The project uses components from [Material UI](https://material-ui.com/getting-started/installation/)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Creators
+This project was created by the following promising Front End Developer students: [Oliver Nygren](https://github.com/olivernygren), [Nicklas Holmqvist](https://github.com/Nicklas-Holmqvist), [Olof Wallgren](https://github.com/olofWallgren), [Timothy Gramnaes](https://github.com/TimothyGramnaes)
