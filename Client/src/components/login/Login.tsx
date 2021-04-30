@@ -49,13 +49,11 @@ function LoginComponent() {
             alert('You are now logged in')
             history.push('/admin')
           }
-          // if(!response.ok) {
-          //   setError('Something went wrong. Try again')
-          // }
           return response.text();
         })
         .then((data)=> {
-          setError(data)
+          const dataToDisplay = data.replaceAll('"', '')
+          setError(dataToDisplay)
         })
         .catch((error) => {
           console.log(error)
