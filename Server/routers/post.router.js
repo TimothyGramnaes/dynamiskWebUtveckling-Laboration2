@@ -41,27 +41,47 @@ router.post("/api/admin/post", async (req, res) => {
 
 /// Ändrar en post
 router.put("/api/admin/post/:id", async (req, res) => {
+
+  const auth = await req.cookies.jwt  
+  const doc = await PostModel.findById(req.params.id);
+
+  const docs = await PostModel.find({ _id: doc })
+
+  if (docs[0].userId === auth) {
+
   try {
     await PostModel.findByIdAndUpdate({ _id: req.params.id }, req.body)
     res.status(200).json({ message: "Post sucsessfully edited!" });
 
   } catch (error) {
-    res.status(400).json({ message: "Something went wrong!", error: error });
+    res.status(400).json({ message: "Something went wrong!"});
   }
+} else {
+  res.status(400).json({ message: "This is not your post!"});
+}
 
 
 });
 
 /// Tar bort en post 
 router.delete("/api/post/:id", async (req, res) => {
+  const auth = await req.cookies.jwt  
   const doc = await PostModel.findById(req.params.id);
-  PostModel.deleteOne(doc, (error) => {
-    if (error) {
-      res.status(400).json(error)
-    } else {
-      res.status(200).json({ message: "Post sucessfully deleted" })
-    }
-  });
+
+  const docs = await PostModel.find({ _id: doc })
+
+  if (docs[0].userId === auth) {
+    PostModel.deleteOne(doc, (error) => {
+      if (error) {
+        res.status(400).json(error)
+      } else {
+        res.status(200).json({ message: "Post sucessfully deleted" })
+      }
+    });
+  } else {
+    res.status(400).json("This is not your post")
+  }
+  
 });
 
 module.exports = router;

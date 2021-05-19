@@ -20,7 +20,7 @@ app.use((err, req, res, next) => {
 async function run() {
   try {
     await mongoose.connect(
-      "mongodb+srv://oliver:test123@laboration-2.y0faq.mongodb.net/lab-2-db",
+      "mongodb://localhost:27017/salt",
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,
