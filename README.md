@@ -45,4 +45,5 @@ Backend: http://localhost:3000
 Frontend: http://localhost:3001
 
 ## Creators
+
 This project was created by the following promising Front End Developer students: [Oliver Nygren](https://github.com/olivernygren), [Nicklas Holmqvist](https://github.com/Nicklas-Holmqvist), [Olof Wallgren](https://github.com/olofWallgren), [Timothy Gramnaes](https://github.com/TimothyGramnaes)
