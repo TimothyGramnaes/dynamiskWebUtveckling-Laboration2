@@ -20,7 +20,7 @@ app.use((err, req, res, next) => {
 async function run() {
   try {
     await mongoose.connect(
-      "Klistra in din mongoDb server-länk här!",
+      "mongodb://localhost:27017/salt",
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,
