@@ -21,7 +21,7 @@ Content-Type: application/json
 ###
 
 /// Ändrar en post
-PUT http://localhost:3001/api/admin/post/60a51691ee39815a8899d951
+PUT http://localhost:3001/api/admin/post/60a50e2561726e0ecca765b2
 Content-Type: application/json
 
 {
@@ -33,4 +33,4 @@ Content-Type: application/json
 ###
 
 /// Tar bort en post
-DELETE http://localhost:3001/api/post/60a51691ee39815a8899d951
+DELETE http://localhost:3001/api/post/60a50e2561726e0ecca765b2
