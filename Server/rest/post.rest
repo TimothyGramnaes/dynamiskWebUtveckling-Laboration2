@@ -21,11 +21,10 @@ Content-Type: application/json
 ###
 
 /// Ändrar en post
-PUT http://localhost:3001/api/admin/post/60a50e2561726e0ecca765b2
+PUT http://localhost:3001/api/admin/post/60acf179df9ee646d81e9c87
 Content-Type: application/json
 
 {
-   
     "title": "Nytt edit test",
     "content": "Nu är posten ändrad"
 }
@@ -33,4 +32,4 @@ Content-Type: application/json
 ###
 
 /// Tar bort en post
-DELETE http://localhost:3001/api/post/60a50e2561726e0ecca765b2
+DELETE http://localhost:3001/api/post/60a51024bf899b53140a215b
